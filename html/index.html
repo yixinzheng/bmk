@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>首页</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+</head>
+<body>
+<div id="app">
+    <header>
+        <span>BMK科研助手</span>
+    </header>
+    <div class="mt2p5"></div>
+    <div class="sider">
+        <select class="sider-select" v-model="typeId" @change="handleSelect">
+            <option :value="item.id" v-for="item in types">{{item.name}}</option>
+        </select>
+        <div class="sider-box">
+            <input type="text" placeholder="请输入关键词" @keyup.enter="handleSearch" class="sider-input" v-model="title">
+            <div class="sider-icon" @click="handleSearch"></div>
+        </div>
+    </div>
+    <div class="label-container">
+        <div class="label-top">
+            <div class="label-word">我的标签</div>
+            <div class="label-trash" @click="toggleDel"></div>
+            <div class="label-refresh"></div>
+            <div class="label-rule">标签细则</div>
+        </div>
+        <div class="label-item">
+            <div class="label-con">
+                <div class="label-tag">真菌</div>
+                <div class="label-del" v-if="delState" @click="handleDelete"></div>
+            </div>
+            <div class="label-con">
+                <div class="label-tag">真菌</div>
+                <div class="label-del" v-if="delState"></div>
+            </div>
+            <div class="label-con">
+                <div class="label-tag">真菌</div>
+                <div class="label-del" v-if="delState"></div>
+            </div>
+            <div class="label-con">
+                <div class="label-tag">真菌</div>
+                <div class="label-del" v-if="delState"></div>
+            </div>
+            <div class="label-con">
+                <div class="label-tag">真菌</div>
+                <div class="label-del" v-if="delState"></div>
+            </div>
+        </div>
+    </div>
+    <div class="list-container">
+        <div class="list-box">
+            <div class="list-title" @click="goView(1)">科研助手科研助手科研助手科研助手科研助手科研助手科研助手科研助手</div>
+            <div class="list-tagBox">
+                <div class="list-tagKey">标签：</div>
+                <div class="list-tagVal">
+                    <div class="list-tag" @click="handleTag('真菌')">真菌</div>
+                    <div class="list-tag">ma</div>
+                    <div class="list-tag">医学</div>
+                    <div class="list-tag">单细胞</div>
+                    <div class="list-tag">流感</div>
+                </div>
+            </div>
+            <div class="list-con">
+                <div class="list-time">2018-08-01</div>
+                <div class="list-comment">100</div>
+                <div class="list-love" :class="{'active': loveState}" @click="toggleLove">100</div>
+            </div>
+        </div>
+    </div>
+    <div class="list-more">点击加载更多</div>
+    <div class="mt4"></div>
+    <footer>
+        <div class="tab-item tab-work active">
+            <div class="tab-icon icon-work"></div>
+            <div class="tab-it">科研助手</div>
+        </div>
+        <div class="tab-item tab-inTime build-btn">
+            <div class="tab-icon icon-inTime"></div>
+            <div class="tab-it">热点信息</div>
+        </div>
+        <div class="tab-item tab-info">
+            <div class="tab-icon icon-info"></div>
+            <div class="tab-it">我的收藏</div>
+        </div>
+        <div class="tab-item tab-my build-btn" @click="goCenter">
+            <div class="tab-icon icon-my"></div>
+            <div class="tab-it">个人中心</div>
+        </div>
+    </footer>
+</div>
+<script type="text/javascript" src="../script/rem.js"></script>
+<script type="text/javascript" src="../script/aui-dialog.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/vue.min.js"></script>
+<script type="text/javascript" src="../script/script.js"></script>
+<script>
+    var toast = new auiToast()
+    var dialog = new auiDialog()
+    new Vue({
+        el:'#app',
+        data(){
+            return {
+                loveState: false,
+                delState: false,
+                types: [
+                    {
+                        id: 1,
+                        name: '全部'
+                    },
+                    {
+                        id: 2,
+                        name: '英文文献'
+                    },
+                    {
+                        id: 3,
+                        name: '文献解读'
+                    },
+                    {
+                        id: 4,
+                        name: '工具软件'
+                    },
+                    {
+                        id: 5,
+                        name: '培训教程'
+                    }
+                ],
+                typeId: 1,
+                title: ''
+            }
+        },
+        methods:{
+            handleTag(param){
+                dialog.alert({
+                    title: "提示",
+                    msg: '"'+param+'"' + '添加到我的标签?',
+                    buttons: ['取消', '确定']
+                }, function(ret) {
+                    if (ret.buttonIndex == 2) {
+                        toast.success({
+                            title: "添加成功",
+                            duration: 2000
+                        })
+                    }
+                })
+            },
+            handleSelect(){
+              console.log(this.typeId)
+            },
+            toggleLove(){
+              this.loveState = !this.loveState
+            },
+            toggleDel(){
+                this.delState = !this.delState
+            },
+            handleSearch(){
+                location.href = './search.html?title='+ this.title
+            },
+            handleDelete(){
+                dialog.alert({
+                    title: "提示",
+                    msg: '是否删除该标签?',
+                    buttons: ['取消', '确定']
+                }, function(ret) {
+                    if (ret.buttonIndex == 2) {
+                        toast.success({
+                            title: "删除成功",
+                            duration: 2000
+                        })
+                    }
+                })
+            },
+            goView(id){
+                location.href = './view.html?id='+ id
+            },
+            goCenter(){
+                location.href = './center.html'
+            }
+        }
+    })
+</script>
+</body>
+</html>

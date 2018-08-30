@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>详情页</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+</head>
+<body>
+<div id="app">
+    <header>
+        <i onclick="history.go(-1)"></i>
+        <span>详情页</span>
+    </header>
+    <div class="mt2p5"></div>
+    <div class="view-box">
+        <div class="view-title">内容标题内容标题内容标题内容标题内容标题内容标题</div>
+        <div class="view-detail">
+            内容标题内容标题内容标题内容标题内容标题内容标题
+            内容标题内容标题内容标题内容标题内容标题内容标题
+            内容标题内容标题内容标题内容标题内容标题内容标题
+        </div>
+        <div class="list-tagBox">
+            <div class="list-tagKey">标签：</div>
+            <div class="list-tagVal">
+                <div class="list-tag">真菌</div>
+                <div class="list-tag">ma</div>
+                <div class="list-tag">医学</div>
+                <div class="list-tag">单细胞</div>
+                <div class="list-tag">流感</div>
+            </div>
+        </div>
+    </div>
+    <div class="view-box">
+        <div class="view-tip">作者: 123</div>
+        <div class="view-tip">影响因子: 123</div>
+        <div class="view-tip">发表时间: 2018-06-01</div>
+        <div class="view-tip">发表杂志: 123</div>
+    </div>
+    <div class="view-box">
+        <div class="view-tip">英文文献:</div>
+        <div class="view-tip">bacdefg</div>
+    </div>
+    <div class="view-box">
+        <div class="view-tip">文献全文下载:</div>
+        <div class="view-tip">bacdefg</div>
+    </div>
+    <div class="view-box">
+        <div class="view-tip">来源链接:</div>
+        <div class="view-tip"><a href="http://www.baidu.com" class="fs-blue">http://www.baidu.com</a></div>
+    </div>
+    <div class="view-box">
+        <div class="view-tip">相关文献:</div>
+        <div class="view-tip">123123</div>
+        <div class="view-tip">123123</div>
+        <div class="view-tip">123123</div>
+        <div class="view-tip">123123</div>
+    </div>
+    <div class="comment-topBox">
+        <div class="comment-top">共有<span class="comment-total">188</span>条评论</div>
+    </div>
+    <div class="comment-tip">
+        <div class="comment-tipVal">热门评论</div>
+    </div>
+    <div class="comment-box">
+        <div class="view-box">
+            <div class="comment-line">
+                <div class="comment-name">kevin</div>
+                <div class="comment-time">2018-05-06</div>
+            </div>
+            <div class="view-detail">
+                内容标题内容标题内容标题内容标题内容标题内容标题
+                内容标题内容标题内容标题内容标题内容标题内容标题
+                内容标题内容标题内容标题内容标题内容标题内容标题
+            </div>
+            <div class="comment-con">
+                <div class="comment-zan">100</div>
+                <div class="comment-do" @click="goComment('kevin',1)">评论</div>
+            </div>
+        </div>
+        <div class="view-box">
+            <div class="comment-line">
+                <div class="comment-name">kobe</div>
+                <div class="comment-time">2018-05-06</div>
+            </div>
+            <div class="view-detail">
+                内容标题内容标题内容标题内容标题内容标题内容标题
+                内容标题内容标题内容标题内容标题内容标题内容标题
+                内容标题内容标题内容标题内容标题内容标题内容标题
+            </div>
+            <div class="comment-con">
+                <div class="comment-zan">100</div>
+                <div class="comment-do" @click="goComment('kobe',2)">评论</div>
+            </div>
+        </div>
+    </div>
+    <div class="list-more">点击加载更多</div>
+    <textarea :placeholder="placeholder" class="comment-text"></textarea>
+    <div class="comment-btn">发表评论</div>
+    <div class="mt4"></div>
+    <footer>
+        <div class="view-barBtn icon-love"><span class="fs-blue">123</span>个喜欢</div>
+        <div class="view-barBtn icon-star"><span class="fs-blue">123</span>人收藏</div>
+    </footer>
+</div>
+<script type="text/javascript" src="../script/rem.js"></script>
+<script type="text/javascript" src="../script/aui-dialog.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/vue.min.js"></script>
+<script type="text/javascript" src="../script/jquery.min.js"></script>
+<script type="text/javascript" src="../script/script.js"></script>
+<script>
+    var toast = new auiToast()
+    var dialog = new auiDialog()
+    new Vue({
+        el:'#app',
+        data(){
+            return {
+                id: '',
+                commentId: '',
+                placeholder: '请输入您对该文献的评论'
+            }
+        },
+        mounted(){
+            this.id = this.getUrlParam('id')
+            this.getInfo()
+        },
+        methods:{
+            getInfo(){
+              console.log(this.id)
+            },
+            goComment(name,id){
+                $(window).scrollTop( $(".comment-text").offset().top - '100')
+                this.placeholder = '回复' + name + ":"
+                this.commentId = id
+            },
+            //获取参数
+            getUrlParam(name){
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)")
+                var r = decodeURI(location.search).substr(1).match(reg)
+                if (r != null) return unescape(r[2])
+                return null
+            }
+        }
+    })
+</script>
+</body>
+</html>

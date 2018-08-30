@@ -1,0 +1,507 @@
+/*头部*/
+header {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 3;
+    display: flex;
+    justify-content: space-between;
+    height: 2.5rem;
+    line-height: 2.5rem;
+    padding: 0 .6rem;
+    color: #fff;
+    background-color: #3a93f7;
+}
+
+header i {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    width: 2rem;
+    height: 2.5rem;
+    float: left;
+    background: url('../image/icon-back.png') center center no-repeat;
+    background-size: 32% auto;
+}
+
+header span {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem;
+    line-height: 2.5rem;
+    text-align: center;
+    font-size: .9rem;
+}
+
+/*尾部*/
+footer {
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 3;
+    height: 2.5rem;
+    padding: .25rem .6rem;
+    background-color: #fff;
+    box-shadow: 0 0 .5rem #b3d5fa;
+}
+
+.tab-item {
+    width: 20%;
+    text-align: center;
+}
+
+.tab-icon {
+    width: 1rem;
+    height: 1.2rem;
+    margin: 0 auto;
+}
+
+.icon-work {
+    background: url('../image/icon-work.png') center center no-repeat;
+    background-size: 100% auto;
+}
+
+.icon-inTime {
+    background: url('../image/icon-inTime.png') center center no-repeat;
+    background-size: 100% auto;
+}
+
+.icon-info {
+    position: relative;
+    background: url('../image/icon-info.png') center center no-repeat;
+    background-size: 100% auto;
+}
+
+.icon-my {
+    background: url('../image/icon-my.png') center center no-repeat;
+    background-size: 100% auto;
+}
+
+.tab-item.active .icon-work {
+    background-image: url('../image/icon-workActive.png');
+}
+
+.tab-item.active .icon-inTime {
+    background-image: url('../image/icon-inTimeActive.png');
+}
+
+.tab-item.active .icon-info {
+    background-image: url('../image/icon-infoActive.png');
+}
+
+.tab-item.active .icon-my {
+    background-image: url('../image/icon-myActive.png');
+}
+
+.tab-it {
+    height: .8rem;
+    line-height: .8rem;
+    font-size: .6rem;
+    color: #898989;
+}
+
+.tab-item.active .tab-it {
+    color: #3a93f7;
+}
+
+/*首页*/
+.sider{
+    display: flex;
+    justify-content: space-between;
+    padding: .5rem;
+    height: 3rem;
+}
+.sider-select{
+    width: 25%;
+    height: 2rem;
+}
+.sider-box{
+    display: flex;
+    width: 70%;
+    height: 2rem;
+    border: 1px solid #ccc;
+}
+.sider-input{
+    width: 80%;
+    height: 2rem;
+    padding: 0 .5rem;
+    font-size: .8rem;
+    outline: none;
+    border: none;
+}
+.sider-icon{
+    width: 20%;
+    height: 2rem;
+    background: url("../image/icon-search.png") center center no-repeat;
+    background-size: 35% auto;
+}
+.label-container{
+    padding: 0 .5rem .5rem .5rem;
+}
+.label-top{
+    height: 2rem;
+    line-height: 2rem;
+    font-size: .7rem;
+    overflow: hidden;
+}
+.label-word{
+    float: left;
+    color: #333;
+}
+.label-trash{
+    float: left;
+    width: 2rem;
+    height: 2rem;
+    background: url("../image/icon-trash.png") center center no-repeat;
+    background-size: 50% auto;
+}
+.label-refresh{
+    float: left;
+    width: 2rem;
+    height: 2rem;
+    background: url("../image/icon-refresh.png") center center no-repeat;
+    background-size: 50% auto;
+}
+.label-rule{
+    float: right;
+    color: #3a93f7;
+}
+.label-item{
+    overflow: hidden;
+}
+.label-con{
+    float: left;
+    height: 1rem;
+    line-height: 1rem;
+    margin: 0 .5rem .5rem .5rem;
+    color: #fff;
+    background-color: #3a93f7;
+    overflow: hidden;
+    border-radius: .4rem;
+}
+.label-tag{
+    float: left;
+    padding: 0 .5rem;
+    font-size: .7rem;
+}
+.label-del{
+    float: right;
+    width: 1rem;
+    height: 1rem;
+    background: url("../image/icon-del.png") center center no-repeat;
+    background-size: 50% auto;
+}
+
+.list-box {
+    margin-bottom: .6rem;
+    background-color: #f4f3f8;
+    padding: 0 .5rem;
+}
+.list-title{
+    padding: .5rem 0;
+    line-height: 1.2rem;
+    font-size: .8rem;
+    color: #333;
+}
+.list-tagBox{
+    display: flex;
+    font-size: .7rem;
+}
+.list-tagKey{
+    width: 20%;
+    height: 1.2rem;
+    line-height: 1.2rem;
+    color: #333;
+}
+.list-tagVal{
+    display: flex;
+    flex-wrap: wrap;
+    color: #3a93f7;
+}
+.list-tag{
+    padding: 0 .5rem;
+    line-height: 1.2rem;
+}
+.list-con{
+    height: 1.5rem;
+    line-height: 1.5rem;
+    margin-top: 1rem;
+    font-size: .7rem;
+    color: #aaa;
+    overflow: hidden;
+}
+.list-time{
+    float: left;
+}
+.list-comment{
+    float: right;
+    padding-left: 1.2rem;
+    color: #aaa;
+    background: url("../image/icon-comment.png") left center no-repeat;
+    background-size: auto 60%;
+}
+.list-love{
+    float: right;
+    padding-left: 1.2rem;
+    margin-right: .5rem;
+    background: url("../image/icon-love.png") left center no-repeat;
+    background-size: auto 60%;
+}
+.list-love.active{
+    background-image: url("../image/icon-loveActive.png");
+}
+.list-more{
+    width: 60%;
+    height: 2rem;
+    line-height: 2rem;
+    margin: .6rem auto;
+    text-align: center;
+    font-size: .7rem;
+    color: #333;
+    border: 1px solid #ccc;
+    background: url("../image/icon-arrowDown.png") 1rem center no-repeat;
+    background-size: auto 50%;
+}
+
+/*详情页*/
+.view-box{
+    padding: .5rem 1rem;
+    border-bottom: 1px solid #ddd;
+}
+.view-title{
+    font-size: .9rem;
+    line-height: 1.5rem;
+}
+.view-detail{
+    font-size: .7rem;
+    line-height: 1.2rem;
+    margin: .5rem auto;
+}
+.view-tip{
+    font-size: .7rem;
+    line-height: 1.2rem;
+}
+.comment-topBox{
+    padding: 0 1rem;
+    overflow: hidden;
+}
+.comment-top{
+    float: left;
+    height: 2rem;
+    line-height: 2rem;
+    font-size: .7rem;
+    border-bottom: .1rem solid #ddd;
+}
+.comment-total{
+    font-weight: bold;
+    color: #3a93f7;
+}
+.comment-tip{
+    position: relative;
+    height: 1px;
+    margin-top: 1rem;
+    background-color: #ddd;
+}
+.comment-tipVal{
+    position: absolute;
+    left: 50%;
+    top: -1rem;
+    z-index: 2;
+    width: 5rem;
+    margin-left: -2.5rem;
+    height: 2rem;
+    line-height: 2rem;
+    padding: 0 .5rem;
+    font-size: .7rem;
+    text-align: center;
+    background-color: #fff;
+}
+.comment-line{
+    display: flex;
+    justify-content: space-between;
+    font-size: .7rem;
+}
+.comment-name{
+    color: #3a93f7;
+}
+.comment-time{
+    color: #666;
+}
+.comment-con{
+    display: flex;
+    justify-content: flex-end;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    font-size: .7rem;
+}
+.comment-do{
+    color: #3a93f7;
+    padding: 0 .5rem;
+    margin-left: .5rem;
+}
+.comment-zan{
+    padding-left: 1.2rem;
+    color: #aaa;
+    background: url("../image/icon-zan.png") left center no-repeat;
+    background-size: auto 60%;
+}
+.comment-zan.active{
+    background-image: url("../image/icon-zanActive.png");
+}
+.comment-text{
+    display: block;
+    width: 90%;
+    margin: .5rem auto;
+    height: 7rem;
+    line-height: 1.5rem;
+    padding: .5rem;
+    font-size: .7rem;
+    border: 1px solid #eee;
+}
+.comment-btn{
+    width: 90%;
+    margin: .5rem auto;
+    height: 2rem;
+    line-height: 2rem;
+    color: #fff;
+    font-size: .8rem;
+    text-align: center;
+    border-radius: .2rem;
+    background-color: #3a93f7;
+}
+.view-barBtn{
+    width: 50%;
+    height: 2rem;
+    line-height: 2rem;
+    text-align: right;
+    font-size: .7rem;
+ }
+.icon-love{
+    background: url("../image/icon-love.png") 2rem center no-repeat;
+    background-size: auto 70%;
+}
+.icon-love.active{
+    background: url("../image/icon-loveActive.png") 2rem center no-repeat;
+    background-size: auto 70%;
+}
+.icon-star{
+    background: url("../image/icon-star.png") 2rem center no-repeat;
+    background-size: auto 70%;
+}
+.icon-star.active{
+    background: url("../image/icon-starActive.png") 2rem center no-repeat;
+    background-size: auto 70%;
+}
+
+/*个人中心*/
+.center-top{
+    position: relative;
+    height: 10rem;
+    background-color: #1E90FF;
+}
+.center-banner{
+    width: 100%;
+    height: 100%;
+}
+.center-topBox{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 2;
+    text-align: center;
+}
+.center-header{
+    display: block;
+    width: 4rem;
+    height: 4rem;
+    margin: 2.2rem auto 0;
+    border-radius: 100%;
+}
+.center-name{
+    height: 1.5rem;
+    line-height: 1.5rem;
+    font-size: .8rem;
+    color: #fff;
+}
+.center-item{
+    display: block;
+    width: 92%;
+    height: 3rem;
+    line-height: 3rem;
+    margin: 0 auto;
+    padding-left: 2rem;
+    font-size: .8rem;
+    color: #333;
+    border-bottom: 1px solid #eee;
+    background-position: .2rem center;
+    background-size: 1.2rem auto;
+    background-repeat: no-repeat;
+}
+.center-collect{
+    background-image: url("../image/myCollect@3x.png");
+}
+.center-comment{
+    background-image: url("../image/myComment@3x.png");
+}
+.center-modify{
+    background-image: url("../image/myModify@3x.png");
+}
+.center-tag{
+    background-image: url("../image/myActivity@3x.png");
+}
+.center-advice{
+    background-image: url("../image/myAdvice@3x.png");
+}
+.center-man{
+    background-image: url("../image/myMan@3x.png");
+}
+.center-more{
+    float: right;
+    color: #ccc;
+}
+.center-exit{
+    width: 90%;
+    height: 2rem;
+    line-height: 2rem;
+    margin: 1rem auto;
+    color: #fff;
+    font-size: .8rem;
+    text-align: center;
+    background-color: #3a93f7;
+    border-radius: 1rem;
+}
+
+/*搜索结果页*/
+.search-container{
+    padding: .5rem;
+}
+.search-box{
+    width: 100%;
+}
+
+/*public*/
+.mt2p5{
+    margin-top: 2.5rem;
+}
+
+.mt4{
+    margin-top: 4rem;
+}
+
+.fs-red{
+    color: red;
+}
+
+.fs-blue{
+    color: #3a93f7;
+}
