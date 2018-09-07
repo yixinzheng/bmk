@@ -364,7 +364,7 @@ footer {
     line-height: 1.5rem;
     padding: .5rem;
     font-size: .7rem;
-    border: 1px solid #eee;
+    border: 1px solid #ccc;
 }
 .comment-btn{
     width: 90%;
@@ -492,7 +492,7 @@ footer {
 /*注册页*/
 .login-wrapper{
     margin: .5rem .6rem;
-    padding: 5rem 2rem;
+    padding: 2rem;
 }
 
 .login-box {
@@ -535,6 +535,43 @@ footer {
     color: #fff;
     font-size: .8rem;
     background-color: #3a93f7;
+}
+.regist-wechat{
+    width: 4rem;
+    height: 6rem;
+    margin: 0 auto;
+    background: url('../image/icon-wechat.png') center center no-repeat;
+    background-size: 50% auto;
+}
+/* 登录页 */
+.login-con{
+    display: flex;
+    justify-content: space-between;
+    font-size: .8rem;
+    color: #3a93f7;
+}
+
+/* 个人信息 */
+.info-box{
+    display: flex;
+    justify-content: space-between;
+    font-size: .7rem;
+}
+.info-key{
+    width: 20%;
+    height: 2.5rem;
+    line-height: 2.5rem;
+    color: #333;
+    white-space: nowrap;
+}
+.info-val{
+    width: 80%;
+    height: 2.5rem;
+    border-bottom: 1px solid #ccc;
+    outline: none;
+}
+.info-text{
+    width: 100%;
 }
 
 /*public*/

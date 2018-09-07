@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width" />
     <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
-    <title>注册页</title>
+    <title>登录页</title>
     <link rel="stylesheet" type="text/css" href="../css/api.css" />
     <link rel="stylesheet" type="text/css" href="../css/aui.css" />
     <link rel="stylesheet" type="text/css" href="../css/style.css" />
@@ -13,26 +13,21 @@
 <div id="app">
     <header>
         <i onclick="history.go(-1)"></i>
-        <span>注册</span>
+        <span>登录</span>
     </header>
     <div class="mt2p5"></div>
     <div class="login-wrapper">
         <div class="login-box">
-            <div class="login-val"><input type="text" placeholder="手机号码"></div>
+            <div class="login-val"><input type="tel" placeholder="请输入已认证手机"></div>
         </div>
         <div class="login-box">
-            <div class="login-val login-val2">
-                <input type="text" placeholder="请输入验证码">
-                <div class="login-code">获取验证码</div>
-            </div>
+            <div class="login-val"><input type="password" placeholder="请输入密码"></div>
         </div>
-        <div class="login-box">
-            <div class="login-val"><input type="password" placeholder="设置密码"></div>
+        <div class="login-btn">登录</div>
+        <div class="login-con">
+            <div class="login-link">忘记密码?</div>
+            <div class="login-link">快速注册</div>
         </div>
-        <div class="login-box">
-            <div class="login-val"><input type="password" placeholder="重复密码"></div>
-        </div>
-        <div class="login-btn">注册</div>
         <div class="comment-tip" style="margin-top: 2rem;">
             <div class="comment-tipVal">快捷登录</div>
         </div>

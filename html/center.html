@@ -58,7 +58,7 @@
             <div class="tab-icon icon-inTime"></div>
             <div class="tab-it">热点信息</div>
         </div>
-        <div class="tab-item tab-info">
+        <div class="tab-item tab-info" @click="goCollect">
             <div class="tab-icon icon-info"></div>
             <div class="tab-it">我的收藏</div>
         </div>
@@ -99,6 +99,9 @@
             },
             goIndex(){
                 location.href = './index.html'
+            },
+            goCollect(){
+                location.href = './collect.html'
             }
         }
     })
