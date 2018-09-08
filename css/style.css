@@ -113,23 +113,26 @@ footer {
 }
 
 /*首页*/
-.sider{
+.sider {
     display: flex;
     justify-content: space-between;
     padding: .5rem;
     height: 3rem;
 }
-.sider-select{
+
+.sider-select {
     width: 25%;
     height: 2rem;
 }
-.sider-box{
+
+.sider-box {
     display: flex;
     width: 70%;
     height: 2rem;
     border: 1px solid #ccc;
 }
-.sider-input{
+
+.sider-input {
     width: 80%;
     height: 2rem;
     padding: 0 .5rem;
@@ -137,47 +140,56 @@ footer {
     outline: none;
     border: none;
 }
-.sider-icon{
+
+.sider-icon {
     width: 20%;
     height: 2rem;
     background: url("../image/icon-search.png") center center no-repeat;
     background-size: 35% auto;
 }
-.label-container{
+
+.label-container {
     padding: 0 .5rem .5rem .5rem;
 }
-.label-top{
+
+.label-top {
     height: 2rem;
     line-height: 2rem;
     font-size: .7rem;
     overflow: hidden;
 }
-.label-word{
+
+.label-word {
     float: left;
     color: #333;
 }
-.label-trash{
+
+.label-trash {
     float: left;
     width: 2rem;
     height: 2rem;
     background: url("../image/icon-trash.png") center center no-repeat;
     background-size: 50% auto;
 }
-.label-refresh{
+
+.label-refresh {
     float: left;
     width: 2rem;
     height: 2rem;
     background: url("../image/icon-refresh.png") center center no-repeat;
     background-size: 50% auto;
 }
-.label-rule{
+
+.label-rule {
     float: right;
     color: #3a93f7;
 }
-.label-item{
+
+.label-item {
     overflow: hidden;
 }
-.label-con{
+
+.label-con {
     float: left;
     height: 1rem;
     line-height: 1rem;
@@ -187,12 +199,14 @@ footer {
     overflow: hidden;
     border-radius: .4rem;
 }
-.label-tag{
+
+.label-tag {
     float: left;
     padding: 0 .5rem;
     font-size: .7rem;
 }
-.label-del{
+
+.label-del {
     float: right;
     width: 1rem;
     height: 1rem;
@@ -205,32 +219,38 @@ footer {
     background-color: #f4f3f8;
     padding: 0 .5rem;
 }
-.list-title{
+
+.list-title {
     padding: .5rem 0;
     line-height: 1.2rem;
     font-size: .8rem;
     color: #333;
 }
-.list-tagBox{
+
+.list-tagBox {
     display: flex;
     font-size: .7rem;
 }
-.list-tagKey{
+
+.list-tagKey {
     width: 20%;
     height: 1.2rem;
     line-height: 1.2rem;
     color: #333;
 }
-.list-tagVal{
+
+.list-tagVal {
     display: flex;
     flex-wrap: wrap;
     color: #3a93f7;
 }
-.list-tag{
+
+.list-tag {
     padding: 0 .5rem;
     line-height: 1.2rem;
 }
-.list-con{
+
+.list-con {
     height: 1.5rem;
     line-height: 1.5rem;
     margin-top: 1rem;
@@ -238,27 +258,32 @@ footer {
     color: #aaa;
     overflow: hidden;
 }
-.list-time{
+
+.list-time {
     float: left;
 }
-.list-comment{
+
+.list-comment {
     float: right;
     padding-left: 1.2rem;
     color: #aaa;
     background: url("../image/icon-comment.png") left center no-repeat;
     background-size: auto 60%;
 }
-.list-love{
+
+.list-love {
     float: right;
     padding-left: 1.2rem;
     margin-right: .5rem;
     background: url("../image/icon-love.png") left center no-repeat;
     background-size: auto 60%;
 }
-.list-love.active{
+
+.list-love.active {
     background-image: url("../image/icon-loveActive.png");
 }
-.list-more{
+
+.list-more {
     width: 60%;
     height: 2rem;
     line-height: 2rem;
@@ -272,45 +297,53 @@ footer {
 }
 
 /*详情页*/
-.view-box{
+.view-box {
     padding: .5rem 1rem;
     border-bottom: 1px solid #ddd;
 }
-.view-title{
+
+.view-title {
     font-size: .9rem;
     line-height: 1.5rem;
 }
-.view-detail{
+
+.view-detail {
     font-size: .7rem;
     line-height: 1.2rem;
     margin: .5rem auto;
 }
-.view-tip{
+
+.view-tip {
     font-size: .7rem;
     line-height: 1.2rem;
 }
-.comment-topBox{
+
+.comment-topBox {
     padding: 0 1rem;
     overflow: hidden;
 }
-.comment-top{
+
+.comment-top {
     float: left;
     height: 2rem;
     line-height: 2rem;
     font-size: .7rem;
     border-bottom: .1rem solid #ddd;
 }
-.comment-total{
+
+.comment-total {
     font-weight: bold;
     color: #3a93f7;
 }
-.comment-tip{
+
+.comment-tip {
     position: relative;
     height: 1px;
     margin-top: 1rem;
     background-color: #ddd;
 }
-.comment-tipVal{
+
+.comment-tipVal {
     position: absolute;
     left: 50%;
     top: -1rem;
@@ -324,39 +357,47 @@ footer {
     text-align: center;
     background-color: #fff;
 }
-.comment-line{
+
+.comment-line {
     display: flex;
     justify-content: space-between;
     font-size: .7rem;
 }
-.comment-name{
+
+.comment-name {
     color: #3a93f7;
 }
-.comment-time{
+
+.comment-time {
     color: #666;
 }
-.comment-con{
+
+.comment-con {
     display: flex;
     justify-content: flex-end;
     height: 1.5rem;
     line-height: 1.5rem;
     font-size: .7rem;
 }
-.comment-do{
+
+.comment-do {
     color: #3a93f7;
     padding: 0 .5rem;
     margin-left: .5rem;
 }
-.comment-zan{
+
+.comment-zan {
     padding-left: 1.2rem;
     color: #aaa;
     background: url("../image/icon-zan.png") left center no-repeat;
     background-size: auto 60%;
 }
-.comment-zan.active{
+
+.comment-zan.active {
     background-image: url("../image/icon-zanActive.png");
 }
-.comment-text{
+
+.comment-text {
     display: block;
     width: 90%;
     margin: .5rem auto;
@@ -365,8 +406,10 @@ footer {
     padding: .5rem;
     font-size: .7rem;
     border: 1px solid #ccc;
+    resize: none;
 }
-.comment-btn{
+
+.comment-btn {
     width: 90%;
     margin: .5rem auto;
     height: 2rem;
@@ -377,41 +420,48 @@ footer {
     border-radius: .2rem;
     background-color: #3a93f7;
 }
-.view-barBtn{
+
+.view-barBtn {
     width: 50%;
     height: 2rem;
     line-height: 2rem;
     text-align: right;
     font-size: .7rem;
- }
-.icon-love{
+}
+
+.icon-love {
     background: url("../image/icon-love.png") 2rem center no-repeat;
     background-size: auto 70%;
 }
-.icon-love.active{
+
+.icon-love.active {
     background: url("../image/icon-loveActive.png") 2rem center no-repeat;
     background-size: auto 70%;
 }
-.icon-star{
+
+.icon-star {
     background: url("../image/icon-star.png") 2rem center no-repeat;
     background-size: auto 70%;
 }
-.icon-star.active{
+
+.icon-star.active {
     background: url("../image/icon-starActive.png") 2rem center no-repeat;
     background-size: auto 70%;
 }
 
 /*个人中心*/
-.center-top{
+.center-top {
     position: relative;
     height: 10rem;
     background-color: #1E90FF;
 }
-.center-banner{
+
+.center-banner {
     width: 100%;
     height: 100%;
 }
-.center-topBox{
+
+.center-topBox {
     position: absolute;
     left: 0;
     right: 0;
@@ -420,20 +470,23 @@ footer {
     z-index: 2;
     text-align: center;
 }
-.center-header{
+
+.center-header {
     display: block;
     width: 4rem;
     height: 4rem;
     margin: 2.2rem auto 0;
     border-radius: 100%;
 }
-.center-name{
+
+.center-name {
     height: 1.5rem;
     line-height: 1.5rem;
     font-size: .8rem;
     color: #fff;
 }
-.center-item{
+
+.center-item {
     display: block;
     width: 92%;
     height: 3rem;
@@ -447,29 +500,37 @@ footer {
     background-size: 1.2rem auto;
     background-repeat: no-repeat;
 }
-.center-collect{
+
+.center-collect {
     background-image: url("../image/myCollect@3x.png");
 }
-.center-comment{
+
+.center-comment {
     background-image: url("../image/myComment@3x.png");
 }
-.center-modify{
+
+.center-modify {
     background-image: url("../image/myModify@3x.png");
 }
-.center-tag{
+
+.center-tag {
     background-image: url("../image/myActivity@3x.png");
 }
-.center-advice{
+
+.center-advice {
     background-image: url("../image/myAdvice@3x.png");
 }
-.center-man{
+
+.center-man {
     background-image: url("../image/myMan@3x.png");
 }
-.center-more{
+
+.center-more {
     float: right;
     color: #ccc;
 }
-.center-exit{
+
+.center-exit {
     width: 90%;
     height: 2rem;
     line-height: 2rem;
@@ -482,15 +543,34 @@ footer {
 }
 
 /*搜索结果页*/
-.search-container{
+.search-container {
     padding: .5rem;
 }
-.search-box{
+
+.search-box {
     width: 100%;
 }
 
+.search-result{
+    line-height: 2rem;
+    padding: 0 .5rem;
+    font-size: .8rem;
+    word-break: break-all;
+}
+
+/*我的标签*/
+.label-container{
+    padding: 1rem .5rem;
+}
+.label-hint{
+    line-height: 1.5rem;
+    font-size: .7rem;
+    padding: 2rem .5rem;
+    color: #3a93f7;
+}
+
 /*注册页*/
-.login-wrapper{
+.login-wrapper {
     margin: .5rem .6rem;
     padding: 2rem;
 }
@@ -507,15 +587,16 @@ footer {
     outline: none;
 }
 
-.login-val2{
+.login-val2 {
     display: flex;
     justify-content: space-between;
 }
-.login-val2 input{
+
+.login-val2 input {
     width: 60%;
 }
 
-.login-code{
+.login-code {
     width: 36%;
     margin: .5rem 0;
     height: 1.5rem;
@@ -536,15 +617,17 @@ footer {
     font-size: .8rem;
     background-color: #3a93f7;
 }
-.regist-wechat{
+
+.regist-wechat {
     width: 4rem;
     height: 6rem;
     margin: 0 auto;
     background: url('../image/icon-wechat.png') center center no-repeat;
     background-size: 50% auto;
 }
+
 /* 登录页 */
-.login-con{
+.login-con {
     display: flex;
     justify-content: space-between;
     font-size: .8rem;
@@ -552,41 +635,67 @@ footer {
 }
 
 /* 个人信息 */
-.info-box{
+.info-box {
     display: flex;
     justify-content: space-between;
     font-size: .7rem;
 }
-.info-key{
+
+.info-key {
     width: 20%;
     height: 2.5rem;
     line-height: 2.5rem;
     color: #333;
     white-space: nowrap;
 }
-.info-val{
+
+.info-val {
     width: 80%;
     height: 2.5rem;
     border-bottom: 1px solid #ccc;
     outline: none;
 }
-.info-text{
+
+.info-text {
     width: 100%;
 }
 
+/*问题建议*/
+.advice-box{
+    height: 5rem;
+    line-height: 5rem;
+    text-align: center;
+    font-size: .8rem;
+    color: #3a93f7;
+}
+
+/*我的评论*/
+.comment-date{
+    padding-top: .5rem;
+    line-height: 1.5rem;
+    font-size: .8rem;
+    color: #999;
+}
+.comment-body{
+    padding-bottom: .5rem;
+    line-height: 1.5rem;
+    font-size: .8rem;
+    color: #999;
+}
+
 /*public*/
-.mt2p5{
+.mt2p5 {
     margin-top: 2.5rem;
 }
 
-.mt4{
+.mt4 {
     margin-top: 4rem;
 }
 
-.fs-red{
+.fs-red {
     color: red;
 }
 
-.fs-blue{
+.fs-blue {
     color: #3a93f7;
 }

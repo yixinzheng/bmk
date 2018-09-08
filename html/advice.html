@@ -16,7 +16,8 @@
         <span>问题与建议</span>
     </header>
     <div class="mt2p5"></div>
-    <div class="login-wrapper">
+    <div class="advice-box">欢迎给我们提出宝贵的意见</div>
+    <div class="login-wrapper" style="margin: 0 .6rem;padding: 0 2rem;">
         <div class="info-box">
             <div class="info-key">邮箱</div>
             <input type="text" class="info-val">
@@ -31,6 +32,25 @@
         <textarea placeholder="请输入您的问题与建议" class="comment-text info-text"></textarea>
         <div class="login-btn">提交</div>
     </div>
+    <div class="mt4"></div>
+    <footer>
+        <div class="tab-item tab-work" @click="goIndex">
+            <div class="tab-icon icon-work"></div>
+            <div class="tab-it">科研助手</div>
+        </div>
+        <div class="tab-item tab-inTime" @click="goHot">
+            <div class="tab-icon icon-inTime"></div>
+            <div class="tab-it">热点信息</div>
+        </div>
+        <div class="tab-item tab-info" @click="goCollect">
+            <div class="tab-icon icon-info"></div>
+            <div class="tab-it">我的收藏</div>
+        </div>
+        <div class="tab-item tab-my active">
+            <div class="tab-icon icon-my"></div>
+            <div class="tab-it">个人中心</div>
+        </div>
+    </footer>
 </div>
 <script type="text/javascript" src="../script/rem.js"></script>
 <script type="text/javascript" src="../script/aui-dialog.js"></script>
@@ -47,7 +67,15 @@
             }
         },
         methods:{
-
+            goIndex(){
+                location.href = './index.html'
+            },
+            goHot(){
+                location.href = './hot.html'
+            },
+            goCollect(){
+                location.href = './collect.html'
+            }
         }
     })
 </script>

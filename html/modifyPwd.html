@@ -34,6 +34,25 @@
         </div>
         <div class="login-btn">修改密码</div>
     </div>
+    <div class="mt4"></div>
+    <footer>
+        <div class="tab-item tab-work" @click="goIndex">
+            <div class="tab-icon icon-work"></div>
+            <div class="tab-it">科研助手</div>
+        </div>
+        <div class="tab-item tab-inTime" @click="goHot">
+            <div class="tab-icon icon-inTime"></div>
+            <div class="tab-it">热点信息</div>
+        </div>
+        <div class="tab-item tab-info" @click="goCollect">
+            <div class="tab-icon icon-info"></div>
+            <div class="tab-it">我的收藏</div>
+        </div>
+        <div class="tab-item tab-my active" @click="goCenter">
+            <div class="tab-icon icon-my"></div>
+            <div class="tab-it">个人中心</div>
+        </div>
+    </footer>
 </div>
 <script type="text/javascript" src="../script/rem.js"></script>
 <script type="text/javascript" src="../script/aui-dialog.js"></script>
@@ -50,7 +69,18 @@
             }
         },
         methods:{
-
+            goIndex(){
+                location.href = './index.html'
+            },
+            goHot(){
+                location.href = './hot.html'
+            },
+            goCollect(){
+                location.href = './collect.html'
+            },
+            goCenter(){
+                location.href = './center.html'
+            }
         }
     })
 </script>

@@ -23,15 +23,15 @@
             <div class="center-name">Kevin</div>
         </div>
     </div>
-    <a href="" class="center-item center-collect">
+    <a href="./collect.html" class="center-item center-collect">
         我的收藏（68）
         <div class="center-more">&gt;</div>
     </a>
-    <a href="" class="center-item center-comment">
+    <a href="./myComment.html" class="center-item center-comment">
         我的评论
         <div class="center-more">&gt;</div>
     </a>
-    <a href="" class="center-item center-modify">
+    <a href="./modifyPwd.html" class="center-item center-modify">
         修改密码
         <div class="center-more">&gt;</div>
     </a>
@@ -39,12 +39,20 @@
         我的标签（6）
         <div class="center-more">&gt;</div>
     </a>
-    <a href="" class="center-item center-advice">
+    <a href="./advice.html" class="center-item center-advice">
         提出建议
         <div class="center-more">&gt;</div>
     </a>
-    <a href="" class="center-item center-man">
+    <a href="./personInfo.html" class="center-item center-man">
         个人信息
+        <div class="center-more">&gt;</div>
+    </a>
+    <a href="./login.html" class="center-item center-man">
+        登录(临时)
+        <div class="center-more">&gt;</div>
+    </a>
+    <a href="./regist.html" class="center-item center-man">
+        注册(临时)
         <div class="center-more">&gt;</div>
     </a>
     <div class="center-exit" @click="handleExit">退出</div>
@@ -54,7 +62,7 @@
             <div class="tab-icon icon-work"></div>
             <div class="tab-it">科研助手</div>
         </div>
-        <div class="tab-item tab-inTime build-btn">
+        <div class="tab-item tab-inTime" @click="goHot">
             <div class="tab-icon icon-inTime"></div>
             <div class="tab-it">热点信息</div>
         </div>
@@ -99,6 +107,9 @@
             },
             goIndex(){
                 location.href = './index.html'
+            },
+            goHot(){
+                location.href = './hot.html'
             },
             goCollect(){
                 location.href = './collect.html'

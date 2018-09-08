@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width" />
     <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
-    <title>首页</title>
+    <title>热点资讯</title>
     <link rel="stylesheet" type="text/css" href="../css/api.css" />
     <link rel="stylesheet" type="text/css" href="../css/aui.css" />
     <link rel="stylesheet" type="text/css" href="../css/style.css" />
@@ -13,7 +13,7 @@
 <div id="app">
     <header>
         <i onclick="history.go(-1)"></i>
-        <span>我的收藏</span>
+        <span>热点资讯</span>
     </header>
     <div class="mt2p5"></div>
     <div class="sider">
@@ -70,11 +70,11 @@
             <div class="tab-icon icon-work"></div>
             <div class="tab-it">科研助手</div>
         </div>
-        <div class="tab-item tab-inTime" @click="goHot">
+        <div class="tab-item tab-inTime active">
             <div class="tab-icon icon-inTime"></div>
             <div class="tab-it">热点信息</div>
         </div>
-        <div class="tab-item tab-info active">
+        <div class="tab-item tab-info" @click="goCollect">
             <div class="tab-icon icon-info"></div>
             <div class="tab-it">我的收藏</div>
         </div>
@@ -168,11 +168,11 @@
             goIndex(){
                 location.href = './index.html'
             },
-            goHot(){
-                location.href = './hot.html'
-            },
             goView(id){
                 location.href = './view.html?id='+ id
+            },
+            goCollect(){
+                location.href = './collect.html'
             },
             goCenter(){
                 location.href = './center.html'
