@@ -17,10 +17,7 @@
     </header>
     <div class="mt2p5"></div>
     <div class="sider">
-        <select class="sider-select" v-model="typeId" @change="handleSelect">
-            <option :value="item.id" v-for="item in types">{{item.name}}</option>
-        </select>
-        <div class="sider-box">
+        <div class="sider-box" style="width: 100%;">
             <input type="text" placeholder="请输入关键词" @keyup.enter="handleSearch" class="sider-input" v-model="title">
             <div class="sider-icon" @click="handleSearch"></div>
         </div>
@@ -98,50 +95,10 @@
             return {
                 loveState: false,
                 delState: false,
-                types: [
-                    {
-                        id: 1,
-                        name: '全部'
-                    },
-                    {
-                        id: 2,
-                        name: '英文文献'
-                    },
-                    {
-                        id: 3,
-                        name: '文献解读'
-                    },
-                    {
-                        id: 4,
-                        name: '工具软件'
-                    },
-                    {
-                        id: 5,
-                        name: '培训教程'
-                    }
-                ],
-                typeId: 1,
                 title: ''
             }
         },
         methods:{
-            handleTag(param){
-                dialog.alert({
-                    title: "提示",
-                    msg: '"'+param+'"' + '添加到我的标签?',
-                    buttons: ['取消', '确定']
-                }, function(ret) {
-                    if (ret.buttonIndex == 2) {
-                        toast.success({
-                            title: "添加成功",
-                            duration: 2000
-                        })
-                    }
-                })
-            },
-            handleSelect(){
-              console.log(this.typeId)
-            },
             toggleLove(){
               this.loveState = !this.loveState
             },

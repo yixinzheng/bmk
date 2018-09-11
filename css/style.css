@@ -164,19 +164,11 @@ footer {
     color: #333;
 }
 
-.label-trash {
+.label-setting {
     float: left;
     width: 2rem;
     height: 2rem;
-    background: url("../image/icon-trash.png") center center no-repeat;
-    background-size: 50% auto;
-}
-
-.label-refresh {
-    float: left;
-    width: 2rem;
-    height: 2rem;
-    background: url("../image/icon-refresh.png") center center no-repeat;
+    background: url("../image/icon-setting.png") center center no-repeat;
     background-size: 50% auto;
 }
 
