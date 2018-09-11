@@ -18,12 +18,12 @@
     <div class="mt2p5"></div>
     <div class="login-wrapper">
         <div class="login-box">
-            <div class="login-val"><input type="tel" placeholder="请输入已认证手机"></div>
+            <div class="login-val"><input type="tel" v-model="mobile" placeholder="请输入已认证手机"></div>
         </div>
         <div class="login-box">
-            <div class="login-val"><input type="password" placeholder="请输入密码"></div>
+            <div class="login-val"><input type="password" v-model="password" placeholder="请输入密码"></div>
         </div>
-        <div class="login-btn">登录</div>
+        <div class="login-btn" @click="handleLogin">登录</div>
         <div class="login-con">
             <div class="login-link">忘记密码?</div>
             <div class="login-link" @click="goRegist">快速注册</div>
@@ -38,6 +38,7 @@
 <script type="text/javascript" src="../script/aui-dialog.js"></script>
 <script type="text/javascript" src="../script/aui-toast.js"></script>
 <script type="text/javascript" src="../script/vue.min.js"></script>
+<script type="text/javascript" src="../script/axios.min.js"></script>
 <script type="text/javascript" src="../script/script.js"></script>
 <script>
     var toast = new auiToast()
@@ -46,11 +47,28 @@
         el:'#app',
         data(){
             return {
+                mobile: '',
+                password: ''
             }
         },
         methods:{
             goRegist(){
                 location.href = './regist.html'
+            },
+            handleLogin(){
+                let param = {
+                    Mobile: this.mobile,
+                    Password: this.password
+                }
+                axios.get(apiHost + '/api/account/login/', {
+                    params: param
+                }).then(res => {
+                    if (res.data.code === 200) {
+                        console.log(res.data.data)
+                    }
+                }).catch(function (error) {
+                    alert(error)
+                })
             }
         }
     })
