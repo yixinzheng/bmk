@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>我的评论</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+</head>
+<body>
+<div id="app">
+    <header>
+        <i onclick="history.go(-1)"></i>
+        <span>我的评论</span>
+    </header>
+    <div class="mt2p5"></div>
+    <div class="list-container">
+        <div class="list-box">
+            <div class="comment-date">2018-08-20 15:20:12</div>
+            <div class="list-title" @click="goView(1)">科研助手科研助手科研助手科研助手科研助手科研助手科研助手科研助手</div>
+            <div class="comment-body">
+                评论:&nbsp;《<span class="fs-blue" @click="goView(1)">13123123</span>》
+            </div>
+        </div>
+        <div class="list-box">
+            <div class="comment-date">2018-08-20 15:20:12</div>
+            <div class="list-title" @click="goView(1)">科研助手科研助手科研助手科研助手科研助手科研助手科研助手科研助手</div>
+            <div class="comment-body">
+                评论:&nbsp;《<span class="fs-blue" @click="goView(1)">13123123</span>》
+            </div>
+        </div>
+    </div>
+    <div class="list-more">点击加载更多</div>
+    <div class="mt4"></div>
+    <footer>
+        <div class="tab-item tab-work" @click="goIndex">
+            <div class="tab-icon icon-work"></div>
+            <div class="tab-it">科研助手</div>
+        </div>
+        <div class="tab-item tab-inTime">
+            <div class="tab-icon icon-inTime"></div>
+            <div class="tab-it">热点信息</div>
+        </div>
+        <div class="tab-item tab-info">
+            <div class="tab-icon icon-info"></div>
+            <div class="tab-it">我的收藏</div>
+        </div>
+        <div class="tab-item tab-my active">
+            <div class="tab-icon icon-my"></div>
+            <div class="tab-it">个人中心</div>
+        </div>
+    </footer>
+</div>
+<script type="text/javascript" src="../script/rem.js"></script>
+<script type="text/javascript" src="../script/aui-dialog.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/vue.min.js"></script>
+<script type="text/javascript" src="../script/script.js"></script>
+<script>
+    var toast = new auiToast()
+    var dialog = new auiDialog()
+    new Vue({
+        el:'#app',
+        data(){
+            return {
+                loveState: false,
+                delState: false,
+                types: [
+                    {
+                        id: 1,
+                        name: '全部'
+                    },
+                    {
+                        id: 2,
+                        name: '英文文献'
+                    },
+                    {
+                        id: 3,
+                        name: '文献解读'
+                    },
+                    {
+                        id: 4,
+                        name: '工具软件'
+                    },
+                    {
+                        id: 5,
+                        name: '培训教程'
+                    }
+                ],
+                typeId: 1,
+                title: ''
+            }
+        },
+        methods:{
+            handleTag(param){
+                dialog.alert({
+                    title: "提示",
+                    msg: '"'+param+'"' + '添加到我的标签?',
+                    buttons: ['取消', '确定']
+                }, function(ret) {
+                    if (ret.buttonIndex == 2) {
+                        toast.success({
+                            title: "添加成功",
+                            duration: 2000
+                        })
+                    }
+                })
+            },
+            handleSelect(){
+              console.log(this.typeId)
+            },
+            toggleLove(){
+              this.loveState = !this.loveState
+            },
+            toggleDel(){
+                this.delState = !this.delState
+            },
+            handleSearch(){
+                location.href = './search.html?title='+ this.title
+            },
+            handleDelete(){
+                dialog.alert({
+                    title: "提示",
+                    msg: '是否删除该标签?',
+                    buttons: ['取消', '确定']
+                }, function(ret) {
+                    if (ret.buttonIndex == 2) {
+                        toast.success({
+                            title: "删除成功",
+                            duration: 2000
+                        })
+                    }
+                })
+            },
+            goIndex(){
+                location.href = './index.html'
+            },
+            goView(id){
+                location.href = './view.html?id='+ id
+            },
+            goCenter(){
+                location.href = './center.html'
+            }
+        }
+    })
+</script>
+</body>
+</html>

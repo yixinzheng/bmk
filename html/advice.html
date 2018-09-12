@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>问题与建议</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+</head>
+<body>
+<div id="app">
+    <header>
+        <i onclick="history.go(-1)"></i>
+        <span>问题与建议</span>
+    </header>
+    <div class="mt2p5"></div>
+    <div class="advice-box">欢迎给我们提出宝贵的意见</div>
+    <div class="login-wrapper" style="margin: 0 .6rem;padding: 0 2rem;">
+        <div class="info-box">
+            <div class="info-key">邮箱</div>
+            <input type="text" class="info-val">
+        </div>
+        <div class="info-box">
+            <div class="info-key">手机</div>
+            <input type="tel" class="info-val">
+        </div>
+        <div class="info-box">
+            <div class="info-key">问题与建议</div>
+        </div>
+        <textarea placeholder="请输入您的问题与建议" class="comment-text info-text"></textarea>
+        <div class="login-btn">提交</div>
+    </div>
+    <div class="mt4"></div>
+    <footer>
+        <div class="tab-item tab-work" @click="goIndex">
+            <div class="tab-icon icon-work"></div>
+            <div class="tab-it">科研助手</div>
+        </div>
+        <div class="tab-item tab-inTime" @click="goHot">
+            <div class="tab-icon icon-inTime"></div>
+            <div class="tab-it">热点信息</div>
+        </div>
+        <div class="tab-item tab-info" @click="goCollect">
+            <div class="tab-icon icon-info"></div>
+            <div class="tab-it">我的收藏</div>
+        </div>
+        <div class="tab-item tab-my active">
+            <div class="tab-icon icon-my"></div>
+            <div class="tab-it">个人中心</div>
+        </div>
+    </footer>
+</div>
+<script type="text/javascript" src="../script/rem.js"></script>
+<script type="text/javascript" src="../script/aui-dialog.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/vue.min.js"></script>
+<script type="text/javascript" src="../script/script.js"></script>
+<script>
+    var toast = new auiToast()
+    var dialog = new auiDialog()
+    new Vue({
+        el:'#app',
+        data(){
+            return {
+            }
+        },
+        methods:{
+            goIndex(){
+                location.href = './index.html'
+            },
+            goHot(){
+                location.href = './hot.html'
+            },
+            goCollect(){
+                location.href = './collect.html'
+            }
+        }
+    })
+</script>
+</body>
+</html>

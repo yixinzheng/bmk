@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>搜索结果</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+</head>
+<body>
+<div id="app">
+    <header>
+        <i onclick="history.go(-1)"></i>
+        <span>搜索结果</span>
+    </header>
+    <div class="mt2p5"></div>
+    <div class="search-container">
+        <div class="sider-box search-box">
+            <input type="text" placeholder="请输入关键词" @keyup.enter="handleSearch" class="sider-input" v-model="title">
+            <div class="sider-icon" @click="handleSearch"></div>
+        </div>
+    </div>
+    <div class="search-result">搜索"<span class="fs-red">科研助手</span>"，约<span class="fs-red">2</span>条结果</div>
+    <div class="list-container">
+        <div class="list-box">
+            <div class="list-title" @click="goView(1)"><span class="fs-red">科研助手</span>科研助手科研助手科研助手科研助手科研助手科研助手科研助手科研助手科研助手</div>
+            <div class="list-tagBox">
+                <div class="list-tagKey">标签：</div>
+                <div class="list-tagVal">
+                    <div class="list-tag" @click="handleTag">真菌</div>
+                    <div class="list-tag"><span class="fs-red">ma</span></div>
+                    <div class="list-tag">医学</div>
+                    <div class="list-tag">单细胞</div>
+                    <div class="list-tag">流感</div>
+                </div>
+            </div>
+            <div class="list-con">
+                <div class="list-time">2018-08-01</div>
+                <div class="list-comment">100</div>
+                <div class="list-love" :class="{'active': loveState}" @click="toggleLove">100</div>
+            </div>
+        </div>
+        <div class="list-box">
+            <div class="list-title" @click="goView(1)"><span class="fs-red">科研助手</span>科研助手科研助手科研助手科研助手科研助手科研助手科研助手科研助手科研助手</div>
+            <div class="list-tagBox">
+                <div class="list-tagKey">标签：</div>
+                <div class="list-tagVal">
+                    <div class="list-tag" @click="handleTag">真菌</div>
+                    <div class="list-tag"><span class="fs-red">ma</span></div>
+                    <div class="list-tag">医学</div>
+                    <div class="list-tag">单细胞</div>
+                    <div class="list-tag">流感</div>
+                </div>
+            </div>
+            <div class="list-con">
+                <div class="list-time">2018-08-01</div>
+                <div class="list-comment">100</div>
+                <div class="list-love" :class="{'active': loveState}" @click="toggleLove">100</div>
+            </div>
+        </div>
+    </div>
+    <div class="list-more">点击加载更多</div>
+    <div class="mt4"></div>
+    <footer>
+        <div class="tab-item tab-work" @click="goIndex">
+            <div class="tab-icon icon-work"></div>
+            <div class="tab-it">科研助手</div>
+        </div>
+        <div class="tab-item tab-inTime" @click="goHot">
+            <div class="tab-icon icon-inTime"></div>
+            <div class="tab-it">热点信息</div>
+        </div>
+        <div class="tab-item tab-info" @click="goCollect">
+            <div class="tab-icon icon-info"></div>
+            <div class="tab-it">我的收藏</div>
+        </div>
+        <div class="tab-item tab-my" @click="goCenter">
+            <div class="tab-icon icon-my"></div>
+            <div class="tab-it">个人中心</div>
+        </div>
+    </footer>
+</div>
+<script type="text/javascript" src="../script/rem.js"></script>
+<script type="text/javascript" src="../script/aui-dialog.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/vue.min.js"></script>
+<script type="text/javascript" src="../script/script.js"></script>
+<script>
+    var toast = new auiToast()
+    var dialog = new auiDialog()
+    new Vue({
+        el:'#app',
+        data(){
+            return {
+                loveState: false,
+                title: ''
+            }
+        },
+        mounted(){
+            this.title = this.getUrlParam('title')
+            this.handleSearch()
+        },
+        methods:{
+            handleTag(){
+                dialog.alert({
+                    title: "提示",
+                    msg: '添加到我的标签?',
+                    buttons: ['取消', '确定']
+                }, function(ret) {
+                    if (ret.buttonIndex == 2) {
+                        toast.success({
+                            title: "添加成功",
+                            duration: 2000
+                        })
+                    }
+                })
+            },
+            toggleLove(){
+              this.loveState = !this.loveState
+            },
+            handleSearch(){
+                console.log(this.title)
+            },
+            goIndex(){
+                location.href = './index.html'
+            },
+            goHot(){
+                location.href = './hot.html'
+            },
+            goCollect(){
+                location.href = './collect.html'
+            },
+            goCenter(){
+                location.href = './center.html'
+            },
+            goView(id){
+                location.href = './view.html?id='+ id
+            },
+            //获取参数
+            getUrlParam(name){
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)")
+                var r = decodeURI(location.search).substr(1).match(reg)
+                if (r != null) return unescape(r[2])
+                return null
+            }
+        }
+    })
+</script>
+</body>
+</html>

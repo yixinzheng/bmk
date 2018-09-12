@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>个人中心</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+</head>
+<body>
+<div id="app">
+    <header>
+        <i onclick="history.go(-1)"></i>
+        <span>个人中心</span>
+    </header>
+    <div class="mt2p5"></div>
+    <div class="center-top">
+        <img src="../image/center-bg.png" alt="" class="center-banner">
+        <div class="center-topBox">
+            <img src="../image/header.png" alt="" class="center-header">
+            <div class="center-name">Kevin</div>
+        </div>
+    </div>
+    <a href="./collect.html" class="center-item center-collect">
+        我的收藏（68）
+        <div class="center-more">&gt;</div>
+    </a>
+    <a href="./myComment.html" class="center-item center-comment">
+        我的评论
+        <div class="center-more">&gt;</div>
+    </a>
+    <a href="./modifyPwd.html" class="center-item center-modify">
+        修改密码
+        <div class="center-more">&gt;</div>
+    </a>
+    <a href="" class="center-item center-tag">
+        我的标签（6）
+        <div class="center-more">&gt;</div>
+    </a>
+    <a href="./advice.html" class="center-item center-advice">
+        提出建议
+        <div class="center-more">&gt;</div>
+    </a>
+    <a href="./personInfo.html" class="center-item center-man">
+        个人信息
+        <div class="center-more">&gt;</div>
+    </a>
+    <a href="./login.html" class="center-item center-man">
+        登录(临时)
+        <div class="center-more">&gt;</div>
+    </a>
+    <a href="./regist.html" class="center-item center-man">
+        注册(临时)
+        <div class="center-more">&gt;</div>
+    </a>
+    <div class="center-exit" @click="handleExit">退出</div>
+    <div class="mt4"></div>
+    <footer>
+        <div class="tab-item tab-work" @click="goIndex">
+            <div class="tab-icon icon-work"></div>
+            <div class="tab-it">科研助手</div>
+        </div>
+        <div class="tab-item tab-inTime" @click="goHot">
+            <div class="tab-icon icon-inTime"></div>
+            <div class="tab-it">热点信息</div>
+        </div>
+        <div class="tab-item tab-info" @click="goCollect">
+            <div class="tab-icon icon-info"></div>
+            <div class="tab-it">我的收藏</div>
+        </div>
+        <div class="tab-item tab-my active">
+            <div class="tab-icon icon-my"></div>
+            <div class="tab-it">个人中心</div>
+        </div>
+    </footer>
+</div>
+<script type="text/javascript" src="../script/rem.js"></script>
+<script type="text/javascript" src="../script/aui-dialog.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/vue.min.js"></script>
+<script type="text/javascript" src="../script/script.js"></script>
+<script>
+    var toast = new auiToast()
+    var dialog = new auiDialog()
+    new Vue({
+        el:'#app',
+        data(){
+            return {
+            }
+        },
+        methods:{
+            handleExit(){
+                dialog.alert({
+                    title: "提示",
+                    msg: '确定退出?',
+                    buttons: ['取消', '确定']
+                }, function(ret) {
+                    if (ret.buttonIndex == 2) {
+                        toast.success({
+                            title: "退出成功",
+                            duration: 2000
+                        })
+                    }
+                })
+            },
+            goIndex(){
+                location.href = './index.html'
+            },
+            goHot(){
+                location.href = './hot.html'
+            },
+            goCollect(){
+                location.href = './collect.html'
+            }
+        }
+    })
+</script>
+<script>
+    window._bd_share_config = {
+        common : {
+            bdText : '自定义分享内容',
+            bdDesc : '自定义分享摘要',
+            bdUrl : '自定义分享url地址',
+            bdPic : '自定义分享图片'
+        },
+        share : [{
+            "bdSize" : 16
+        }],
+        slide : [{
+            bdImg : 0,
+            bdPos : "right",
+            bdTop : 100
+        }],
+        image : [{
+            viewType : 'list',
+            viewPos : 'top',
+            viewColor : 'black',
+            viewSize : '16',
+            viewList : ['qzone','tsina','huaban','tqq','renren']
+        }],
+        selectShare : [{
+            "bdselectMiniList" : ['qzone','tqq','kaixin001','bdxc','tqf']
+        }]
+    }
+    with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+</body>
+</html>
