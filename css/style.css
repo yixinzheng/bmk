@@ -206,8 +206,31 @@ footer {
     background-size: 50% auto;
 }
 
+.label-choose-input{
+    width: 96%;
+    margin: .5rem 2%;
+    height: 2rem;
+    padding: 0 .5rem;
+    font-size: .8rem;
+    outline: none;
+    border: 1px solid #ddd;
+}
+.label-choose-hint{
+    padding: 0 2%;
+    font-size: .6rem;
+    line-height: 2rem;
+    color: #666;
+}
+.label-choose-item{
+    padding: 0 2%;
+    line-height: 2rem;
+    font-size: .8rem;
+    color: #3a93f7;
+    font-weight: bold;
+}
+
 .list-box {
-    margin-bottom: .6rem;
+    margin-bottom: .3rem;
     background-color: #f4f3f8;
     padding: 0 .5rem;
 }
@@ -245,7 +268,6 @@ footer {
 .list-con {
     height: 1.5rem;
     line-height: 1.5rem;
-    margin-top: 1rem;
     font-size: .7rem;
     color: #aaa;
     overflow: hidden;
@@ -267,12 +289,12 @@ footer {
     float: right;
     padding-left: 1.2rem;
     margin-right: .5rem;
-    background: url("../image/icon-love.png") left center no-repeat;
+    background: url("../image/icon-star.png") left center no-repeat;
     background-size: auto 60%;
 }
 
 .list-love.active {
-    background-image: url("../image/icon-loveActive.png");
+    background-image: url("../image/icon-starActive.png");
 }
 
 .list-more {
@@ -414,10 +436,10 @@ footer {
 }
 
 .view-barBtn {
-    width: 50%;
+    width: 100%;
     height: 2rem;
     line-height: 2rem;
-    text-align: right;
+    text-align: center;
     font-size: .7rem;
 }
 
@@ -432,12 +454,12 @@ footer {
 }
 
 .icon-star {
-    background: url("../image/icon-star.png") 2rem center no-repeat;
+    background: url("../image/icon-star.png") 5rem center no-repeat;
     background-size: auto 70%;
 }
 
 .icon-star.active {
-    background: url("../image/icon-starActive.png") 2rem center no-repeat;
+    background: url("../image/icon-starActive.png") 5rem center no-repeat;
     background-size: auto 70%;
 }
 
@@ -559,6 +581,26 @@ footer {
     font-size: .7rem;
     padding: 2rem .5rem;
     color: #3a93f7;
+}
+.label-view{
+    padding: 1rem 0;
+    text-align: center;
+}
+.label-name{
+    line-height: 2rem;
+}
+.label-addBox{
+    overflow: hidden;
+}
+.label-add{
+    float: right;
+    line-height: 2rem;
+    padding: 0 .5rem;
+    margin: .5rem;
+    color: #fff;
+    font-size: .7rem;
+    background: #3a93f7;
+    border-radius: .2rem;
 }
 
 /*注册页*/

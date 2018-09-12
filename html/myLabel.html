@@ -19,35 +19,27 @@
     <div class="label-container">
         <div class="label-item">
             <div class="label-con">
-                <div class="label-tag">真菌</div>
+                <div class="label-tag" @click="cancelTag">真菌</div>
             </div>
             <div class="label-con">
-                <div class="label-tag">真菌</div>
+                <div class="label-tag" @click="cancelTag">真菌</div>
             </div>
             <div class="label-con">
-                <div class="label-tag">真菌</div>
+                <div class="label-tag" @click="cancelTag">真菌</div>
             </div>
             <div class="label-con">
-                <div class="label-tag">真菌</div>
+                <div class="label-tag" @click="cancelTag">真菌</div>
             </div>
             <div class="label-con">
-                <div class="label-tag">真菌</div>
+                <div class="label-tag" @click="cancelTag">真菌</div>
             </div>
-            <div class="label-con">
-                <div class="label-tag">真菌</div>
-            </div>
-            <div class="label-con">
-                <div class="label-tag">真菌</div>
-            </div>
-            <div class="label-con">
-                <div class="label-tag">真菌</div>
-            </div>
-            <div class="label-con">
-                <div class="label-tag">真菌</div>
-            </div>
-            <div class="label-con">
-                <div class="label-tag">真菌</div>
-            </div>
+        </div>
+        <input type="text" class="label-choose-input" placeholder="请输入标签名称搜索">
+        <div class="label-choose-box">
+            <div class="label-choose-hint">以下为标签搜索结果，点击添加</div>
+            <div class="label-choose-item">标签1</div>
+            <div class="label-choose-item">标签2</div>
+            <div class="label-choose-item">标签3</div>
         </div>
     </div>
     <div class="label-hint">
@@ -88,6 +80,21 @@
             }
         },
         methods:{
+            //取消订阅
+            cancelTag(){
+                dialog.alert({
+                    title: "提示",
+                    msg: '是否取消订阅该标签?',
+                    buttons: ['取消', '确定']
+                }, function(ret) {
+                    if (ret.buttonIndex == 2) {
+                        toast.success({
+                            title: "取消成功",
+                            duration: 2000
+                        })
+                    }
+                })
+            },
             goIndex(){
                 location.href = './index.html'
             },

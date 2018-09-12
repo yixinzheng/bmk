@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>标签页</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+</head>
+<body>
+<div id="app">
+    <header>
+        <i onclick="history.go(-1)"></i>
+        <span>标签页</span>
+    </header>
+    <div class="mt2p5"></div>
+    <div class="label-view">
+        <div class="label-name">真菌</div>
+        <!--<input type="text" class="label-input" placeholder="请输入标签名称">-->
+        <div class="label-addBox">
+            <div class="label-add" @click="handleTag('真菌')">添加到我的标签</div>
+        </div>
+    </div>
+    <div class="list-container">
+        <div class="list-box">
+            <div class="list-title" @click="goView(1)">科研助手科研助手科研助手科研助手科研助手科研助手科研助手科研助手</div>
+            <div class="list-tagBox">
+                <div class="list-tagKey">标签：</div>
+                <div class="list-tagVal">
+                    <div class="list-tag">真菌</div>
+                    <div class="list-tag">ma</div>
+                    <div class="list-tag">医学</div>
+                    <div class="list-tag">单细胞</div>
+                    <div class="list-tag">流感</div>
+                </div>
+            </div>
+            <div class="list-con">
+                <div class="list-time">2018-08-01</div>
+                <div class="list-comment">100</div>
+                <div class="list-love" :class="{'active': loveState}" @click="toggleLove">100</div>
+            </div>
+        </div>
+        <div class="list-box">
+            <div class="list-title" @click="goView(1)">科研助手科研助手科研助手科研助手科研助手科研助手科研助手科研助手</div>
+            <div class="list-tagBox">
+                <div class="list-tagKey">标签：</div>
+                <div class="list-tagVal">
+                    <div class="list-tag">真菌</div>
+                    <div class="list-tag">ma</div>
+                    <div class="list-tag">医学</div>
+                    <div class="list-tag">单细胞</div>
+                    <div class="list-tag">流感</div>
+                </div>
+            </div>
+            <div class="list-con">
+                <div class="list-time">2018-08-01</div>
+                <div class="list-comment">100</div>
+                <div class="list-love" :class="{'active': loveState}" @click="toggleLove">100</div>
+            </div>
+        </div>
+    </div>
+    <div class="mt4"></div>
+    <footer>
+        <div class="tab-item tab-work" @click="goIndex">
+            <div class="tab-icon icon-work"></div>
+            <div class="tab-it">科研助手</div>
+        </div>
+        <div class="tab-item tab-inTime" @click="goHot">
+            <div class="tab-icon icon-inTime"></div>
+            <div class="tab-it">热点信息</div>
+        </div>
+        <div class="tab-item tab-info" @click="goCollect">
+            <div class="tab-icon icon-info"></div>
+            <div class="tab-it">我的收藏</div>
+        </div>
+        <div class="tab-item tab-my active" @click="goCenter">
+            <div class="tab-icon icon-my"></div>
+            <div class="tab-it">个人中心</div>
+        </div>
+    </footer>
+</div>
+<script type="text/javascript" src="../script/rem.js"></script>
+<script type="text/javascript" src="../script/aui-dialog.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/vue.min.js"></script>
+<script type="text/javascript" src="../script/script.js"></script>
+<script>
+    var toast = new auiToast()
+    var dialog = new auiDialog()
+    new Vue({
+        el:'#app',
+        data(){
+            return {
+                loveState: false
+            }
+        },
+        methods:{
+            //添加标签
+            // handleTag(param){
+            //     dialog.alert({
+            //         title: "提示",
+            //         msg: '"'+param+'"' + '添加到我的标签?',
+            //         buttons: ['取消', '确定']
+            //     }, function(ret) {
+            //         if (ret.buttonIndex == 2) {
+            //             toast.success({
+            //                 title: "添加成功",
+            //                 duration: 2000
+            //             })
+            //         }
+            //     })
+            // },
+            toggleLove(){
+                this.loveState = !this.loveState
+            },
+            //获取参数
+            getUrlParam(name){
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)")
+                var r = decodeURI(location.search).substr(1).match(reg)
+                if (r != null) return unescape(r[2])
+                return null
+            },
+            goIndex(){
+                location.href = './index.html'
+            },
+            goHot(){
+                location.href = './hot.html'
+            },
+            goCollect(){
+                location.href = './collect.html'
+            },
+            goCenter(){
+                location.href = './center.html'
+            }
+        }
+    })
+</script>
+</body>
+</html>

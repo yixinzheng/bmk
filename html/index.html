@@ -28,7 +28,7 @@
         <div class="label-top">
             <div class="label-word">我的标签</div>
             <div class="label-setting" @click="toggleDel"></div>
-            <div class="label-rule">标签细则</div>
+            <div class="label-rule" @click="goMyLabel">标签细则</div>
         </div>
         <div class="label-item">
             <div class="label-con">
@@ -59,11 +59,8 @@
             <div class="list-tagBox">
                 <div class="list-tagKey">标签：</div>
                 <div class="list-tagVal">
-                    <div class="list-tag" @click="handleTag('真菌')">真菌</div>
-                    <div class="list-tag">ma</div>
-                    <div class="list-tag">医学</div>
-                    <div class="list-tag">单细胞</div>
-                    <div class="list-tag">流感</div>
+                    <div class="list-tag" @click="goTag('1')">真菌</div>
+                    <div class="list-tag" @click="goTag('2')">ma</div>
                 </div>
             </div>
             <div class="list-con">
@@ -77,11 +74,8 @@
             <div class="list-tagBox">
                 <div class="list-tagKey">标签：</div>
                 <div class="list-tagVal">
-                    <div class="list-tag" @click="handleTag('真菌')">真菌</div>
-                    <div class="list-tag">ma</div>
-                    <div class="list-tag">医学</div>
-                    <div class="list-tag">单细胞</div>
-                    <div class="list-tag">流感</div>
+                    <div class="list-tag" @click="goTag('1')">真菌</div>
+                    <div class="list-tag" @click="goTag('2')">ma</div>
                 </div>
             </div>
             <div class="list-con">
@@ -153,20 +147,6 @@
             }
         },
         methods:{
-            handleTag(param){
-                dialog.alert({
-                    title: "提示",
-                    msg: '"'+param+'"' + '添加到我的标签?',
-                    buttons: ['取消', '确定']
-                }, function(ret) {
-                    if (ret.buttonIndex == 2) {
-                        toast.success({
-                            title: "添加成功",
-                            duration: 2000
-                        })
-                    }
-                })
-            },
             handleSelect(){
               console.log(this.typeId)
             },
@@ -193,6 +173,9 @@
                     }
                 })
             },
+            goView(id){
+                location.href = './view.html?id='+ id
+            },
             goHot(){
                 location.href = './hot.html'
             },
@@ -204,7 +187,13 @@
             },
             goCenter(){
                 location.href = './center.html'
-            }
+            },
+            goMyLabel(){
+                location.href = './myLabel.html'
+            },
+            goTag(id){
+                location.href = './view.html?id='+ id
+            },
         }
     })
 </script>
