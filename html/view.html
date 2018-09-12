@@ -14,6 +14,10 @@
     <header>
         <i onclick="history.go(-1)"></i>
         <span>详情页</span>
+        <select class="view-select" v-model="typeId" @change="handleSelect">
+            <option :value="item.id" v-for="item in types">{{item.name}}</option>
+        </select>
+        <div class="view-select-icon"></div>
     </header>
     <div class="mt2p5"></div>
     <div class="view-box">
@@ -121,7 +125,30 @@
             return {
                 id: '',
                 commentId: '',
-                placeholder: '请输入您对该文献的评论'
+                placeholder: '请输入您对该文献的评论',
+                types: [
+                    {
+                        id: 1,
+                        name: '全部'
+                    },
+                    {
+                        id: 2,
+                        name: '英文文献'
+                    },
+                    {
+                        id: 3,
+                        name: '文献解读'
+                    },
+                    {
+                        id: 4,
+                        name: '工具软件'
+                    },
+                    {
+                        id: 5,
+                        name: '培训教程'
+                    }
+                ],
+                typeId: 1
             }
         },
         mounted(){
@@ -129,6 +156,9 @@
             this.getInfo()
         },
         methods:{
+            handleSelect(){
+                location.href = './index.html?id='+ this.typeId
+            },
             getInfo(){
               console.log(this.id)
             },

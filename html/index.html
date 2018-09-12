@@ -146,6 +146,11 @@
                 title: ''
             }
         },
+        mounted(){
+            this.typeId = this.getUrlParam('id') || ''
+            console.log(this.typeId)
+            this.getInfo()
+        },
         methods:{
             handleSelect(){
               console.log(this.typeId)
@@ -194,6 +199,13 @@
             goTag(id){
                 location.href = './view.html?id='+ id
             },
+            //获取参数
+            getUrlParam(name){
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)")
+                var r = decodeURI(location.search).substr(1).match(reg)
+                if (r != null) return unescape(r[2])
+                return null
+            }
         }
     })
 </script>
