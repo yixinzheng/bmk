@@ -76,7 +76,7 @@ footer {
 
 .icon-info {
     position: relative;
-    background: url('../image/icon-info.png') center center no-repeat;
+    background: url('../image/icon-stars.png') center center no-repeat;
     background-size: 100% auto;
 }
 
@@ -149,7 +149,7 @@ footer {
     background-size: 35% auto;
 }
 
-.label-container {
+.label-containers {
     padding: 0 .5rem .5rem .5rem;
 }
 
