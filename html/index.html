@@ -24,7 +24,7 @@
             <div class="sider-icon" @click="handleSearch"></div>
         </div>
     </div>
-    <div class="label-container">
+    <div class="label-containers">
         <div class="label-top">
             <div class="label-word">我的标签</div>
             <div class="label-setting" @click="toggleDel"></div>
@@ -149,7 +149,7 @@
         mounted(){
             this.typeId = this.getUrlParam('id') || ''
             console.log(this.typeId)
-            this.getInfo()
+            // this.getInfo()
         },
         methods:{
             handleSelect(){
@@ -197,7 +197,7 @@
                 location.href = './myLabel.html'
             },
             goTag(id){
-                location.href = './view.html?id='+ id
+                location.href = './labelView.html?id='+ id
             },
             //获取参数
             getUrlParam(name){
