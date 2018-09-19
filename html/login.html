@@ -56,13 +56,11 @@
                 location.href = './regist.html'
             },
             handleLogin(){
-                let param = {
-                    Mobile: this.mobile,
-                    Password: this.password
+                let data = {
+                    mobile: this.mobile,
+                    password: this.password
                 }
-                axios.get(apiHost + '/api/account/login/', {
-                    params: param
-                }).then(res => {
+                axios.get(apiHost + '/api/account/login/', data).then(res => {
                     if (res.data.code === 200) {
                         console.log(res.data.data)
                     }
