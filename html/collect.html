@@ -88,6 +88,7 @@
 <script type="text/javascript" src="../script/aui-dialog.js"></script>
 <script type="text/javascript" src="../script/aui-toast.js"></script>
 <script type="text/javascript" src="../script/vue.min.js"></script>
+<script type="text/javascript" src="../script/axios.min.js"></script>
 <script type="text/javascript" src="../script/script.js"></script>
 <script>
     var toast = new auiToast()
@@ -124,7 +125,19 @@
                 title: ''
             }
         },
+        mounted(){
+            this.getData()
+        },
         methods:{
+            getData(data = {}){
+                axios.get(apiHost + '/api/paper/star_list', data).then(res => {
+                    if (res.data.code === 200) {
+                        console.log(res.data.data)
+                    }
+                }).catch(function (error) {
+                    alert(error)
+                })
+            },
             handleTag(param){
                 dialog.alert({
                     title: "提示",

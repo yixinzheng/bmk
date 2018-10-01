@@ -2,12 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width" />
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width"/>
     <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
     <title>我的标签</title>
-    <link rel="stylesheet" type="text/css" href="../css/api.css" />
-    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
-    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/aui.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/style.css"/>
 </head>
 <body>
 <div id="app">
@@ -69,24 +70,36 @@
 <script type="text/javascript" src="../script/aui-dialog.js"></script>
 <script type="text/javascript" src="../script/aui-toast.js"></script>
 <script type="text/javascript" src="../script/vue.min.js"></script>
+<script type="text/javascript" src="../script/axios.min.js"></script>
 <script type="text/javascript" src="../script/script.js"></script>
 <script>
     var toast = new auiToast()
     var dialog = new auiDialog()
     new Vue({
-        el:'#app',
+        el: '#app',
         data(){
-            return {
-            }
+            return {}
         },
-        methods:{
+        mounted(){
+            this.getData()
+        },
+        methods: {
+            getData(data = {}){
+                axios.get(apiHost + '/api/paper/tag', data).then(res => {
+                    if (res.data.code === 200) {
+                        console.log(res.data.data)
+                    }
+                }).catch(function (error) {
+                    alert(error)
+                })
+            },
             //取消订阅
             cancelTag(){
                 dialog.alert({
                     title: "提示",
                     msg: '是否取消订阅该标签?',
                     buttons: ['取消', '确定']
-                }, function(ret) {
+                }, function (ret) {
                     if (ret.buttonIndex == 2) {
                         toast.success({
                             title: "取消成功",

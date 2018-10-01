@@ -3,77 +3,141 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width" />
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width"/>
     <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
     <title>注册</title>
-    <link rel="stylesheet" type="text/css" href="../css/api.css" />
-    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
-    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/aui.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/style.css"/>
 </head>
 
 <body>
-    <div id="app">
-        <header>
-            <i onclick="history.go(-1)"></i>
-            <span>注册</span>
-        </header>
-        <div class="mt2p5"></div>
-        <div class="login-wrapper">
-            <div class="login-box">
-                <div class="login-val"><input type="text" placeholder="手机号码"></div>
+<div id="app">
+    <header>
+        <i onclick="history.go(-1)"></i>
+        <span>注册</span>
+    </header>
+    <div class="mt2p5"></div>
+    <div class="login-wrapper">
+        <div class="login-box">
+            <div class="login-val"><input type="text" v-model="mobile" placeholder="手机号码"></div>
+        </div>
+        <div class="login-box">
+            <div class="login-val login-val2">
+                <input type="text" v-model="verificationCode" placeholder="请输入验证码">
+                <div class="login-code" v-if="state" @click="getCode">获取验证码</div>
+                <div class="login-code" v-else>{{second}}S</div>
             </div>
-            <div class="login-box">
-                <div class="login-val login-val2">
-                    <input type="text" placeholder="请输入验证码">
-                    <div class="login-code" v-if=“state " @click="getCode ">获取验证码</div>
-                <div class="login-code " v-else>{{second}}}S</div>
-            </div>
         </div>
-        <div class="login-box ">
-            <div class="login-val "><input type="password " placeholder="设置密码 "></div>
+        <div class="login-box">
+            <div class="login-val"><input type="password" v-model="pwd" placeholder="设置密码"></div>
         </div>
-        <div class="login-box ">
-            <div class="login-val "><input type="password " placeholder="重复密码 "></div>
+        <div class="login-box">
+            <div class="login-val"><input type="password" v-model="correctPwd" placeholder="重复密码"></div>
         </div>
-        <div class="login-btn ">注册</div>
-        <div class="comment-tip " style="margin-top: 2rem; ">
-            <div class="comment-tipVal ">快捷登录</div>
+        <div class="login-btn" @click="handleRegist">注册</div>
+        <div class="comment-tip" style="margin-top: 2rem;">
+            <div class="comment-tipVal">快捷登录</div>
         </div>
-        <div class="regist-wechat "></div>
+        <div class="regist-wechat"></div>
     </div>
 </div>
-<script type="text/javascript " src="../script/rem.js "></script>
-<script type="text/javascript " src="../script/aui-dialog.js "></script>
-<script type="text/javascript " src="../script/aui-toast.js "></script>
-<script type="text/javascript " src="../script/vue.min.js "></script>
-<script type="text/javascript " src="../script/axios.min.js "></script>
-<script type="text/javascript " src="../script/script.js "></script>
+<script type="text/javascript" src="../script/rem.js"></script>
+<script type="text/javascript" src="../script/aui-dialog.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/vue.min.js"></script>
+<script type="text/javascript" src="../script/axios.min.js"></script>
+<script type="text/javascript" src="../script/script.js"></script>
 <script>
     var toast = new auiToast()
     var dialog = new auiDialog()
     new Vue({
-        el:'#app',
+        el: '#app',
         data(){
             return {
-                state: true
+                mobile: '',
+                pwd: '',
+                correctPwd: '',
+                verificationCode: '',
+                state: true,
+                second: 5
             }
         },
-        methods:{
-            getCode() {
-                axios.get(apiHost + '/api/account/code/', data).then(res => {
-                        if (res.data.code === 200) {
-                            localStorage.setItem('token', res.data.data.auth_token)
-                            toast.success({
-                                title: "登录成功 ",
-                                duration: 1500
-                            })
-                            setTimeout(function() {
-                                location.href = './index.html'
-                            }, 1500)
-                        }
-                    }).catch(function(error) {
-                        alert(error)
+        methods: {
+            getCode() {
+                if (!(/^1[34578]\d{9}$/.test(this.mobile))) {
+                    toast.fail({
+                        title: "手机号有误",
+                        duration: 1500
                     })
+                    this.mobile = ''
+                    return false
+                }
+                let data = {
+                    mobile: this.mobile
+                }
+                axios.get(apiHost + '/api/account/code', data).then(res => {
+                    if (res.data.code === 200) {
+                        toast.success({
+                            title: "获取成功",
+                            duration: 1500
+                        })
+                        this.state = false
+                        let interval = setInterval(() => {
+                            if ((this.second--) <= 0) {
+                                this.second = 5;
+                                this.state = true;
+                                clearInterval(interval);
+                            }
+                        }, 1000)
+                    }
+                }).catch(function (error) {
+                    alert(error)
+                })
+            },
+            handleRegist() {
+                if (!(/^1[34578]\d{9}$/.test(this.mobile))) {
+                    toast.fail({
+                        title: "手机号有误",
+                        duration: 1500
+                    })
+                    this.mobile = ''
+                    return false
+                }
+                if (this.pwd.length < 6 || this.pwd.length > 12) {
+                    toast.fail({
+                        title: "密码在6-12位之间",
+                        duration: 1500
+                    })
+                    return false;
+                }
+                if (this.pwd !== this.correctPwd) {
+                    toast.fail({
+                        title: "密码与重复密码不一致",
+                        duration: 1500
+                    })
+                    return false;
+                }
+                let data = {
+                    mobile: this.mobile,
+                    password: this.pwd,
+                    verificationCode: this.verificationCode
+                }
+                axios.get(apiHost + '/api/account/signup', data).then(res => {
+                    if (res.data.code === 200) {
+                        localStorage.setItem('token', res.data.data.auth_token)
+                        toast.success({
+                            title: "注册成功",
+                            duration: 1500
+                        })
+                        setTimeout(function () {
+                            location.href = './index.html'
+                        }, 1500)
+                    }
+                }).catch(function (error) {
+                    alert(error)
+                })
             }
         }
     })
