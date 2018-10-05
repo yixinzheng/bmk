@@ -54,38 +54,22 @@
         </div>
     </div>
     <div class="list-container">
-        <div class="list-box">
-            <div class="list-title" @click="goView(1)">科研助手科研助手科研助手科研助手科研助手科研助手科研助手科研助手</div>
+        <div class="list-box" v-for="item in list">
+            <div class="list-title" @click="goView(item.id)">{{item.title}}</div>
             <div class="list-tagBox">
                 <div class="list-tagKey">标签：</div>
                 <div class="list-tagVal">
-                    <div class="list-tag" @click="goTag('1')">真菌</div>
-                    <div class="list-tag" @click="goTag('2')">ma</div>
+                    <div class="list-tag" v-for="it in item.tag" @click="goTag(it)">{{it.title}}</div>
                 </div>
             </div>
             <div class="list-con">
-                <div class="list-time">2018-08-01</div>
-                <div class="list-comment">100</div>
-                <div class="list-love" :class="{'active': loveState}" @click="toggleLove">100</div>
-            </div>
-        </div>
-        <div class="list-box">
-            <div class="list-title" @click="goView(1)">科研助手科研助手科研助手科研助手科研助手科研助手科研助手科研助手</div>
-            <div class="list-tagBox">
-                <div class="list-tagKey">标签：</div>
-                <div class="list-tagVal">
-                    <div class="list-tag" @click="goTag('1')">真菌</div>
-                    <div class="list-tag" @click="goTag('2')">ma</div>
-                </div>
-            </div>
-            <div class="list-con">
-                <div class="list-time">2018-08-01</div>
-                <div class="list-comment">100</div>
-                <div class="list-love" :class="{'active': loveState}" @click="toggleLove">100</div>
+                <div class="list-time">{{item.publish_time}}</div>
+                <div class="list-comment">{{item.comment_number}}</div>
+                <div class="list-love" :class="{'active': loveState}" @click="toggleLove">{{item.star_number}}</div>
             </div>
         </div>
     </div>
-    <div class="list-more">点击加载更多</div>
+    <!--<div class="list-more">点击加载更多</div>-->
     <div class="mt4"></div>
     <footer>
         <div class="tab-item tab-work active">
@@ -110,6 +94,7 @@
 <script type="text/javascript" src="../script/aui-dialog.js"></script>
 <script type="text/javascript" src="../script/aui-toast.js"></script>
 <script type="text/javascript" src="../script/vue.min.js"></script>
+<script type="text/javascript" src="../script/axios.min.js"></script>
 <script type="text/javascript" src="../script/script.js"></script>
 <script>
     var toast = new auiToast()
@@ -143,15 +128,25 @@
                     }
                 ],
                 typeId: 1,
-                title: ''
+                title: '',
+                list: []
             }
         },
         mounted(){
+            this.getData()
             this.typeId = this.getUrlParam('id') || ''
-            console.log(this.typeId)
-            // this.getInfo()
         },
         methods:{
+            getData(){
+                axios.get(apiHost + '/api/paper/index').then(res => {
+                    if (res.data.code === 200) {
+                        console.log(res.data.data)
+                        this.list = res.data.data
+                    }
+                }).catch(function (error) {
+                    alert(error)
+                })
+            },
             handleSelect(){
               console.log(this.typeId)
             },
@@ -178,8 +173,8 @@
                     }
                 })
             },
-            goView(id){
-                location.href = './view.html?id='+ id
+            goView(param){
+                location.href = './view.html?id='+ param
             },
             goHot(){
                 location.href = './hot.html'

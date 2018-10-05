@@ -59,18 +59,18 @@
                 location.href = './regist.html'
             },
             handleLogin() {
-                if (!(/^1[34578]\d{9}$/.test(this.mobile))) {
-                    toast.fail({
-                        title: "手机号有误",
-                        duration: 1500
-                    })
-                    this.mobile = ''
-                }
+//                if (!(/^1[34578]\d{9}$/.test(this.mobile))) {
+//                    toast.fail({
+//                        title: "手机号有误",
+//                        duration: 1500
+//                    })
+//                    this.mobile = ''
+//                }
                 let data = {
                     mobile: this.mobile,
                     password: this.password
                 }
-                axios.get(apiHost + '/api/account/login', data).then(res => {
+                axios.post(apiHost + '/api/account/login', data).then(res => {
                     if (res.data.code === 200) {
                         localStorage.setItem('token', res.data.data.auth_token)
                         toast.success({
