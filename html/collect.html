@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width" />
@@ -9,136 +10,142 @@
     <link rel="stylesheet" type="text/css" href="../css/aui.css" />
     <link rel="stylesheet" type="text/css" href="../css/style.css" />
 </head>
+
 <body>
-<div id="app">
-    <header>
-        <i onclick="history.go(-1)"></i>
-        <span>我的收藏</span>
-    </header>
-    <div class="mt2p5"></div>
-    <div class="list-container">
-        <div class="list-box" v-for="item in list">
-            <div class="list-title" @click="goView(item.id)">{{item.title}}</div>
-            <div class="list-tagBox">
-                <div class="list-tagKey">标签：</div>
-                <div class="list-tagVal">
-                    <div class="list-tag" v-for="it in item.tag" @click="handleTag(it)">{{it.title}}</div>
+    <div id="app">
+        <header>
+            <i onclick="history.go(-1)"></i>
+            <span>我的收藏</span>
+        </header>
+        <div class="mt2p5"></div>
+        <div class="list-container">
+            <div class="list-box" v-for="item in list">
+                <div class="list-title" @click="goView(item.id)">{{item.title}}</div>
+                <div class="list-tagBox">
+                    <div class="list-tagKey">标签：</div>
+                    <div class="list-tagVal">
+                        <div class="list-tag" v-for="it in item.tag" @click="handleTag(it)">{{it.title}}</div>
+                    </div>
+                </div>
+                <div class="list-con">
+                    <div class="list-time">{{item.publish_time}}</div>
+                    <div class="list-comment">{{item.comment_number}}</div>
+                    <div class="list-love" :class="{'active': loveState}" @click="toggleLove">{{item.star_number}}</div>
                 </div>
             </div>
-            <div class="list-con">
-                <div class="list-time">{{item.publish_time}}</div>
-                <div class="list-comment">{{item.comment_number}}</div>
-                <div class="list-love" :class="{'active': loveState}" @click="toggleLove">{{item.star_number}}</div>
+        </div>
+        <!--<div class="list-more">点击加载更多</div>-->
+        <div class="mt4"></div>
+        <footer>
+            <div class="tab-item tab-work" @click="goIndex">
+                <div class="tab-icon icon-work"></div>
+                <div class="tab-it">科研助手</div>
             </div>
-        </div>
+            <div class="tab-item tab-inTime" @click="goHot">
+                <div class="tab-icon icon-inTime"></div>
+                <div class="tab-it">热点信息</div>
+            </div>
+            <div class="tab-item tab-info active">
+                <div class="tab-icon icon-info"></div>
+                <div class="tab-it">我的收藏</div>
+            </div>
+            <div class="tab-item tab-my build-btn" @click="goCenter">
+                <div class="tab-icon icon-my"></div>
+                <div class="tab-it">个人中心</div>
+            </div>
+        </footer>
     </div>
-    <!--<div class="list-more">点击加载更多</div>-->
-    <div class="mt4"></div>
-    <footer>
-        <div class="tab-item tab-work" @click="goIndex">
-            <div class="tab-icon icon-work"></div>
-            <div class="tab-it">科研助手</div>
-        </div>
-        <div class="tab-item tab-inTime" @click="goHot">
-            <div class="tab-icon icon-inTime"></div>
-            <div class="tab-it">热点信息</div>
-        </div>
-        <div class="tab-item tab-info active">
-            <div class="tab-icon icon-info"></div>
-            <div class="tab-it">我的收藏</div>
-        </div>
-        <div class="tab-item tab-my build-btn" @click="goCenter">
-            <div class="tab-icon icon-my"></div>
-            <div class="tab-it">个人中心</div>
-        </div>
-    </footer>
-</div>
-<script type="text/javascript" src="../script/rem.js"></script>
-<script type="text/javascript" src="../script/aui-dialog.js"></script>
-<script type="text/javascript" src="../script/aui-toast.js"></script>
-<script type="text/javascript" src="../script/vue.min.js"></script>
-<script type="text/javascript" src="../script/axios.min.js"></script>
-<script type="text/javascript" src="../script/script.js"></script>
-<script>
-    var toast = new auiToast()
-    var dialog = new auiDialog()
-    new Vue({
-        el:'#app',
-        data(){
-            return {
-                loveState: false,
-                delState: false,
-                list: []
+    <script type="text/javascript" src="../script/rem.js"></script>
+    <script type="text/javascript" src="../script/aui-dialog.js"></script>
+    <script type="text/javascript" src="../script/aui-toast.js"></script>
+    <script type="text/javascript" src="../script/vue.min.js"></script>
+    <script type="text/javascript" src="../script/axios.min.js"></script>
+    <script type="text/javascript" src="../script/script.js"></script>
+    <script>
+        var toast = new auiToast()
+        var dialog = new auiDialog()
+        new Vue({
+            el: '#app',
+            data() {
+                return {
+                    loveState: false,
+                    delState: false,
+                    list: []
+                }
+            },
+            mounted() {
+                this.getData()
+            },
+            methods: {
+                getData() {
+                    axios.get(apiHost + '/api/paper/star_list', {
+                        headers: {
+                            'Authorization': 'Token 29958d46b29d5d00fea0b1be12316cacb4eeb545'
+                        }
+                    }).then(res => {
+                        if (res.data.code === 200) {
+                            console.log(res.data.data)
+                            this.list = res.data.data
+                        }
+                    }).catch(function(error) {
+                        alert(error)
+                    })
+                },
+                handleTag(param) {
+                    dialog.alert({
+                        title: "提示",
+                        msg: '"' + param.title + '"' + '添加到我的标签?',
+                        buttons: ['取消', '确定']
+                    }, function(ret) {
+                        if (ret.buttonIndex == 2) {
+                            toast.success({
+                                title: "添加成功",
+                                duration: 2000
+                            })
+                        }
+                    })
+                },
+                handleSelect() {
+                    console.log(this.typeId)
+                },
+                toggleLove() {
+                    this.loveState = !this.loveState
+                },
+                toggleDel() {
+                    this.delState = !this.delState
+                },
+                handleSearch() {
+                    location.href = './search.html?title=' + this.title
+                },
+                handleDelete() {
+                    dialog.alert({
+                        title: "提示",
+                        msg: '是否删除该标签?',
+                        buttons: ['取消', '确定']
+                    }, function(ret) {
+                        if (ret.buttonIndex == 2) {
+                            toast.success({
+                                title: "删除成功",
+                                duration: 2000
+                            })
+                        }
+                    })
+                },
+                goIndex() {
+                    location.href = './index.html'
+                },
+                goHot() {
+                    location.href = './hot.html'
+                },
+                goView(id) {
+                    location.href = './view.html?id=' + id
+                },
+                goCenter() {
+                    location.href = './center.html'
+                }
             }
-        },
-        mounted(){
-            this.getData()
-        },
-        methods:{
-            getData(){
-                axios.get(apiHost + '/api/paper/star_list').then(res => {
-                    if (res.data.code === 200) {
-                        console.log(res.data.data)
-                        this.list = res.data.data
-                    }
-                }).catch(function (error) {
-                    alert(error)
-                })
-            },
-            handleTag(param){
-                dialog.alert({
-                    title: "提示",
-                    msg: '"'+param.title+'"' + '添加到我的标签?',
-                    buttons: ['取消', '确定']
-                }, function(ret) {
-                    if (ret.buttonIndex == 2) {
-                        toast.success({
-                            title: "添加成功",
-                            duration: 2000
-                        })
-                    }
-                })
-            },
-            handleSelect(){
-              console.log(this.typeId)
-            },
-            toggleLove(){
-              this.loveState = !this.loveState
-            },
-            toggleDel(){
-                this.delState = !this.delState
-            },
-            handleSearch(){
-                location.href = './search.html?title='+ this.title
-            },
-            handleDelete(){
-                dialog.alert({
-                    title: "提示",
-                    msg: '是否删除该标签?',
-                    buttons: ['取消', '确定']
-                }, function(ret) {
-                    if (ret.buttonIndex == 2) {
-                        toast.success({
-                            title: "删除成功",
-                            duration: 2000
-                        })
-                    }
-                })
-            },
-            goIndex(){
-                location.href = './index.html'
-            },
-            goHot(){
-                location.href = './hot.html'
-            },
-            goView(id){
-                location.href = './view.html?id='+ id
-            },
-            goCenter(){
-                location.href = './center.html'
-            }
-        }
-    })
-</script>
+        })
+    </script>
 </body>
+
 </html>
