@@ -35,7 +35,7 @@
                 <div class="label-tag" @click="cancelTag">真菌</div>
             </div>
         </div>
-        <input type="text" class="label-choose-input" placeholder="请输入标签名称搜索">
+        <input type="text" class="label-choose-input" v-model="title" @keyup.enter="handleSearch" placeholder="请输入标签名称搜索">
         <div class="label-choose-box">
             <div class="label-choose-hint">以下为标签搜索结果，点击添加</div>
             <div class="label-choose-item">标签1</div>
@@ -78,14 +78,16 @@
     new Vue({
         el: '#app',
         data(){
-            return {}
-        },
-        mounted(){
-            this.getData()
+            return {
+                title: ''
+            }
         },
         methods: {
-            getData(data = {}){
-                axios.get(apiHost + '/api/paper/tag', data).then(res => {
+            handleSearch(){
+                let data = {
+                    title: this.title
+                }
+                axios.get(apiHost + '/api/paper/tag_search', data).then(res => {
                     if (res.data.code === 200) {
                         console.log(res.data.data)
                     }
