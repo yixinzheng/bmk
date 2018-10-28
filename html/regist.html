@@ -77,7 +77,7 @@
                 let data = {
                     mobile: this.mobile
                 }
-                axios.get(apiHost + '/api/account/code', data).then(res => {
+                axios.post(apiHost + '/api/account/code', data).then(res => {
                     if (res.data.code === 200) {
                         toast.success({
                             title: "获取成功",
@@ -124,9 +124,9 @@
                     password: this.pwd,
                     verificationCode: this.verificationCode
                 }
-                axios.get(apiHost + '/api/account/signup', data).then(res => {
+                axios.post(apiHost + '/api/account/signup', data).then(res => {
                     if (res.data.code === 200) {
-                        localStorage.setItem('token', res.data.data.auth_token)
+                        sessionStorage.setItem('token', res.data.data.auth_token)
                         toast.success({
                             title: "注册成功",
                             duration: 1500

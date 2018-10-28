@@ -86,6 +86,7 @@
 <script type="text/javascript" src="../script/aui-dialog.js"></script>
 <script type="text/javascript" src="../script/aui-toast.js"></script>
 <script type="text/javascript" src="../script/vue.min.js"></script>
+<script type="text/javascript" src="../script/axios.min.js"></script>
 <script type="text/javascript" src="../script/script.js"></script>
 <script>
     var toast = new auiToast()
@@ -122,6 +123,19 @@
             },
             handleSearch(){
                 console.log(this.title)
+                let data = {
+                    search: this.title
+                }
+                axios.get(apiHost + '/api/paper/paper_search',{
+                    params: data
+                }).then(res => {
+                    if (res.data.code === 200) {
+                        console.log(res.data.data.list)
+                        this.list = res.data.data.list
+                    }
+                }).catch(function (error) {
+                    alert(error)
+                })
             },
             goIndex(){
                 location.href = './index.html'

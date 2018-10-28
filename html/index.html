@@ -27,36 +27,20 @@
     <div class="label-containers">
         <div class="label-top">
             <div class="label-word">我的标签</div>
-            <div class="label-setting" @click="toggleDel"></div>
+            <!--<div class="label-setting" @click="toggleDel"></div>-->
             <div class="label-rule" @click="goMyLabel">标签细则</div>
         </div>
         <div class="label-item">
-            <div class="label-con">
-                <div class="label-tag">真菌</div>
-                <div class="label-del" v-if="delState" @click="handleDelete"></div>
-            </div>
-            <div class="label-con">
-                <div class="label-tag">真菌</div>
-                <div class="label-del" v-if="delState"></div>
-            </div>
-            <div class="label-con">
-                <div class="label-tag">真菌</div>
-                <div class="label-del" v-if="delState"></div>
-            </div>
-            <div class="label-con">
-                <div class="label-tag">真菌</div>
-                <div class="label-del" v-if="delState"></div>
-            </div>
-            <div class="label-con">
-                <div class="label-tag">真菌</div>
-                <div class="label-del" v-if="delState"></div>
+            <div class="label-con" v-for="item in tagList">
+                <div class="label-tag">{{item.title}}</div>
+                <div class="label-del" v-if="delState" @click.stop="handleDelete(item.id)"></div>
             </div>
         </div>
     </div>
     <div class="list-container">
         <div class="list-box" v-for="item in list">
             <div class="list-title" @click="goView(item.id)">{{item.title}}</div>
-            <div class="list-tagBox">
+            <div class="list-tagBox" v-if="item.tag.length > 0">
                 <div class="list-tagKey">标签：</div>
                 <div class="list-tagVal">
                     <div class="list-tag" v-for="it in item.tag" @click="goTag(it)">{{it.title}}</div>
@@ -69,7 +53,7 @@
             </div>
         </div>
     </div>
-    <!--<div class="list-more">点击加载更多</div>-->
+    <div class="list-more" @click="handleMore">点击加载更多</div>
     <div class="mt4"></div>
     <footer>
         <div class="tab-item tab-work active">
@@ -129,19 +113,47 @@
                 ],
                 typeId: 1,
                 title: '',
-                list: []
+                list: [],
+                page: 1,
+                tagList: []
             }
         },
         mounted(){
             this.getData()
+            this.getTagList()
             this.typeId = this.getUrlParam('id') || ''
         },
         methods:{
+            //获取列表
             getData(){
                 axios.get(apiHost + '/api/paper/index').then(res => {
                     if (res.data.code === 200) {
-                        console.log(res.data.data)
-                        this.list = res.data.data
+                        this.list = res.data.data.list
+                    }
+                }).catch(function (error) {
+                    alert(error)
+                })
+            },
+            //获取标签列表
+            getTagList(){
+                axios.get(apiHost + '/api/paper/tag_list').then(res => {
+                    if (res.data.code === 200) {
+                        this.tagList = res.data.data
+                    }
+                }).catch(function (error) {
+                    alert(error)
+                })
+            },
+            handleMore(){
+                this.page = this.page + 1
+                let data = {
+                    current_page_num: this.page
+                }
+                axios.get(apiHost + '/api/paper/index',{
+                    params: data
+                }).then(res => {
+                    if (res.data.code === 200) {
+                        this.list = this.list.concat(res.data.data.list)
                     }
                 }).catch(function (error) {
                     alert(error)
