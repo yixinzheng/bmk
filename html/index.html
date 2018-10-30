@@ -2,12 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width" />
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width"/>
     <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
     <title>首页</title>
-    <link rel="stylesheet" type="text/css" href="../css/api.css" />
-    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
-    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/aui.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/style.css"/>
 </head>
 <body>
 <div id="app">
@@ -49,7 +50,9 @@
             <div class="list-con">
                 <div class="list-time">{{item.publish_time}}</div>
                 <div class="list-comment">{{item.comment_number}}</div>
-                <div class="list-love" :class="{'active': loveState}" @click="toggleLove">{{item.star_number}}</div>
+                <div class="list-love" :class="{'active': item.is_starred}" @click="toggleLove(item)">
+                    {{item.star_number}}
+                </div>
             </div>
         </div>
     </div>
@@ -84,10 +87,9 @@
     var toast = new auiToast()
     var dialog = new auiDialog()
     new Vue({
-        el:'#app',
-        data(){
+        el: '#app',
+        data() {
             return {
-                loveState: false,
                 delState: false,
                 types: [
                     {
@@ -118,14 +120,14 @@
                 tagList: []
             }
         },
-        mounted(){
+        mounted() {
             this.getData()
             this.getTagList()
             this.typeId = this.getUrlParam('id') || ''
         },
-        methods:{
+        methods: {
             //获取列表
-            getData(){
+            getData() {
                 axios.get(apiHost + '/api/paper/index').then(res => {
                     if (res.data.code === 200) {
                         this.list = res.data.data.list
@@ -135,7 +137,7 @@
                 })
             },
             //获取标签列表
-            getTagList(){
+            getTagList() {
                 axios.get(apiHost + '/api/paper/tag_list').then(res => {
                     if (res.data.code === 200) {
                         this.tagList = res.data.data
@@ -144,12 +146,12 @@
                     alert(error)
                 })
             },
-            handleMore(){
+            handleMore() {
                 this.page = this.page + 1
                 let data = {
                     current_page_num: this.page
                 }
-                axios.get(apiHost + '/api/paper/index',{
+                axios.get(apiHost + '/api/paper/index', {
                     params: data
                 }).then(res => {
                     if (res.data.code === 200) {
@@ -159,24 +161,46 @@
                     alert(error)
                 })
             },
-            handleSelect(){
-              console.log(this.typeId)
+            handleSelect() {
+                console.log(this.typeId)
             },
-            toggleLove(){
-              this.loveState = !this.loveState
+            toggleLove(item) {
+                if (item.is_starred) {
+                    let data = {
+                        paper_id: item.id
+                    }
+                    axios.post(apiHost + '/api/paper/star_remove', data).then(res => {
+                        if (res.data.code === 200) {
+                            item.is_starred = !item.is_starred
+                        }
+                    }).catch(function (error) {
+                        alert(error)
+                    })
+                } else {
+                    let data = {
+                        paper_id: item.id
+                    }
+                    axios.post(apiHost + '/api/paper/star_add', data).then(res => {
+                        if (res.data.code === 200) {
+                            item.is_starred = !item.is_starred
+                        }
+                    }).catch(function (error) {
+                        alert(error)
+                    })
+                }
             },
-            toggleDel(){
+            toggleDel() {
                 this.delState = !this.delState
             },
-            handleSearch(){
-                location.href = './search.html?title='+ this.title
+            handleSearch() {
+                location.href = './search.html?title=' + this.title
             },
-            handleDelete(){
+            handleDelete() {
                 dialog.alert({
                     title: "提示",
                     msg: '是否删除该标签?',
                     buttons: ['取消', '确定']
-                }, function(ret) {
+                }, function (ret) {
                     if (ret.buttonIndex == 2) {
                         toast.success({
                             title: "删除成功",
@@ -185,29 +209,29 @@
                     }
                 })
             },
-            goView(param){
-                location.href = './view.html?id='+ param
+            goView(param) {
+                location.href = './view.html?id=' + param
             },
-            goHot(){
+            goHot() {
                 location.href = './hot.html'
             },
-            goView(id){
-                location.href = './view.html?id='+ id
+            goView(id) {
+                location.href = './view.html?id=' + id
             },
-            goCollect(){
+            goCollect() {
                 location.href = './collect.html'
             },
-            goCenter(){
+            goCenter() {
                 location.href = './center.html'
             },
-            goMyLabel(){
+            goMyLabel() {
                 location.href = './myLabel.html'
             },
-            goTag(id){
-                location.href = './labelView.html?id='+ id
+            goTag(it) {
+                location.href = './labelView.html?id=' + it.id + '&title=' + it.title
             },
             //获取参数
-            getUrlParam(name){
+            getUrlParam(name) {
                 var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)")
                 var r = decodeURI(location.search).substr(1).match(reg)
                 if (r != null) return unescape(r[2])

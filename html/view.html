@@ -23,14 +23,10 @@
     <div class="view-box">
         <div class="view-title">{{viewObj.title}}</div>
         <div class="view-detail">{{viewObj.abstract}}</div>
-        <div class="list-tagBox">
+        <div class="list-tagBox" v-if="viewObj.tag.length > 0">
             <div class="list-tagKey">标签：</div>
             <div class="list-tagVal">
-                <div class="list-tag">真菌</div>
-                <div class="list-tag">ma</div>
-                <div class="list-tag">医学</div>
-                <div class="list-tag">单细胞</div>
-                <div class="list-tag">流感</div>
+                <div class="list-tag" v-for="it in viewObj.tag" @click="goTag(it)">{{it.title}}</div>
             </div>
         </div>
     </div>
@@ -38,7 +34,7 @@
         <div class="view-tip">作者: {{viewObj.author}}</div>
         <div class="view-tip">影响因子: {{viewObj.impact_factor}}</div>
         <div class="view-tip">发表时间: {{viewObj.publish_time}}</div>
-        <div class="view-tip">发表杂志: {{viewObj.author}}</div>
+        <div class="view-tip">发表杂志: {{viewObj.magazine}}</div>
     </div>
     <div class="view-box">
         <div class="view-tip">英文文献:</div>
@@ -103,7 +99,7 @@
     <div class="mt4"></div>
     <footer>
         <!--<div class="view-barBtn icon-love"><span class="fs-blue">123</span>个喜欢</div>-->
-        <div class="view-barBtn icon-star"><span class="fs-blue">{{viewObj.star}}</span>人收藏</div>
+        <div class="view-barBtn icon-star" @click="toggleLove(viewObj)"><span class="fs-blue">{{viewObj.star_number}}</span>人收藏</div>
     </footer>
 </div>
 <script type="text/javascript" src="../script/rem.js"></script>
@@ -170,6 +166,34 @@
                 }).catch(function (error) {
                     alert(error)
                 })
+            },
+            goTag(){
+
+            },
+            toggleLove(item) {
+                if (item.is_starred) {
+                    let data = {
+                        paper_id: item.id
+                    }
+                    axios.post(apiHost + '/api/paper/star_remove', data).then(res => {
+                        if (res.data.code === 200) {
+                            item.is_starred = !item.is_starred
+                        }
+                    }).catch(function (error) {
+                        alert(error)
+                    })
+                } else {
+                    let data = {
+                        paper_id: item.id
+                    }
+                    axios.post(apiHost + '/api/paper/star_add', data).then(res => {
+                        if (res.data.code === 200) {
+                            item.is_starred = !item.is_starred
+                        }
+                    }).catch(function (error) {
+                        alert(error)
+                    })
+                }
             },
             goComment(name,id){
                 $(window).scrollTop( $(".comment-text").offset().top - '100')

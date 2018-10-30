@@ -17,47 +17,27 @@
     </header>
     <div class="mt2p5"></div>
     <div class="label-view">
-        <div class="label-name">真菌</div>
+        <div class="label-name">{{title}}</div>
         <!--<input type="text" class="label-input" placeholder="请输入标签名称">-->
         <div class="label-addBox">
             <div class="label-add" @click="handleTag('真菌')">添加到我的标签</div>
         </div>
     </div>
     <div class="list-container">
-        <div class="list-box">
-            <div class="list-title" @click="goView(1)">科研助手科研助手科研助手科研助手科研助手科研助手科研助手科研助手</div>
-            <div class="list-tagBox">
+        <div class="list-box" v-for="item in list">
+            <div class="list-title" @click="goView(item.id)">{{item.title}}</div>
+            <div class="list-tagBox" v-if="item.tag.length > 0">
                 <div class="list-tagKey">标签：</div>
                 <div class="list-tagVal">
-                    <div class="list-tag">真菌</div>
-                    <div class="list-tag">ma</div>
-                    <div class="list-tag">医学</div>
-                    <div class="list-tag">单细胞</div>
-                    <div class="list-tag">流感</div>
+                    <div class="list-tag" v-for="it in item.tag" @click="goTag(it)">{{it.title}}</div>
                 </div>
             </div>
             <div class="list-con">
-                <div class="list-time">2018-08-01</div>
-                <div class="list-comment">100</div>
-                <div class="list-love" :class="{'active': loveState}" @click="toggleLove">100</div>
-            </div>
-        </div>
-        <div class="list-box">
-            <div class="list-title" @click="goView(1)">科研助手科研助手科研助手科研助手科研助手科研助手科研助手科研助手</div>
-            <div class="list-tagBox">
-                <div class="list-tagKey">标签：</div>
-                <div class="list-tagVal">
-                    <div class="list-tag">真菌</div>
-                    <div class="list-tag">ma</div>
-                    <div class="list-tag">医学</div>
-                    <div class="list-tag">单细胞</div>
-                    <div class="list-tag">流感</div>
+                <div class="list-time">{{item.publish_time}}</div>
+                <div class="list-comment">{{item.comment_number}}</div>
+                <div class="list-love" :class="{'active': item.is_starred}" @click="toggleLove(item)">
+                    {{item.star_number}}
                 </div>
-            </div>
-            <div class="list-con">
-                <div class="list-time">2018-08-01</div>
-                <div class="list-comment">100</div>
-                <div class="list-love" :class="{'active': loveState}" @click="toggleLove">100</div>
             </div>
         </div>
     </div>
@@ -85,6 +65,7 @@
 <script type="text/javascript" src="../script/aui-dialog.js"></script>
 <script type="text/javascript" src="../script/aui-toast.js"></script>
 <script type="text/javascript" src="../script/vue.min.js"></script>
+<script type="text/javascript" src="../script/axios.min.js"></script>
 <script type="text/javascript" src="../script/script.js"></script>
 <script>
     var toast = new auiToast()
@@ -93,8 +74,16 @@
         el:'#app',
         data(){
             return {
+                id: '',
+                title: '',
+                list: [],
                 loveState: false
             }
+        },
+        mounted(){
+            this.id = this.getUrlParam('id')
+            this.title = this.getUrlParam('title')
+            this.getInfo()
         },
         methods:{
             //添加标签
@@ -112,6 +101,20 @@
             //         }
             //     })
             // },
+            getInfo(){
+                let data = {
+                    id: this.id
+                }
+                axios.get(apiHost + '/api/paper/tag', {
+                    params: data
+                }).then(res => {
+                    if (res.data.code === 200) {
+                        this.list = res.data.data.list
+                    }
+                }).catch(function (error) {
+                    alert(error)
+                })
+            },
             toggleLove(){
                 this.loveState = !this.loveState
             },
