@@ -86,7 +86,7 @@
                         this.state = false
                         let interval = setInterval(() => {
                             if ((this.second--) <= 0) {
-                                this.second = 5;
+                                this.second = 60;
                                 this.state = true;
                                 clearInterval(interval);
                             }
