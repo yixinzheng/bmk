@@ -85,6 +85,7 @@
 <script type="text/javascript" src="../script/aui-dialog.js"></script>
 <script type="text/javascript" src="../script/aui-toast.js"></script>
 <script type="text/javascript" src="../script/vue.min.js"></script>
+<script type="text/javascript" src="../script/axios.min.js"></script>
 <script type="text/javascript" src="../script/script.js"></script>
 <script>
     var toast = new auiToast()
@@ -95,10 +96,25 @@
             return {
                 loveState: false,
                 delState: false,
-                title: ''
+                title: '',
+                list: []
             }
         },
+        mounted() {
+            this.getData()
+        },
         methods:{
+            //获取列表
+            getData() {
+                axios.get(apiHost + '/api/paper/news').then(res => {
+                    if (res.data.code === 200) {
+                        this.list = res.data.data.list
+                        console.log(res.data.data)
+                    }
+                }).catch(function (error) {
+                    alert(error)
+                })
+            },
             toggleLove(){
               this.loveState = !this.loveState
             },

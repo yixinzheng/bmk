@@ -167,8 +167,8 @@
                     alert(error)
                 })
             },
-            goTag(){
-
+            goTag(it){
+                location.href = './labelView.html?id=' + it.id + '&title=' + it.title
             },
             toggleLove(item) {
                 if (item.is_starred) {

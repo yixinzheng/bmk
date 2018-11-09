@@ -20,7 +20,7 @@
         <div class="label-name">{{title}}</div>
         <!--<input type="text" class="label-input" placeholder="请输入标签名称">-->
         <div class="label-addBox">
-            <div class="label-add" @click="handleTag('真菌')">添加到我的标签</div>
+            <div class="label-add" @click="handleTag(title)">添加到我的标签</div>
         </div>
     </div>
     <div class="list-container">
@@ -87,20 +87,29 @@
         },
         methods:{
             //添加标签
-            // handleTag(param){
-            //     dialog.alert({
-            //         title: "提示",
-            //         msg: '"'+param+'"' + '添加到我的标签?',
-            //         buttons: ['取消', '确定']
-            //     }, function(ret) {
-            //         if (ret.buttonIndex == 2) {
-            //             toast.success({
-            //                 title: "添加成功",
-            //                 duration: 2000
-            //             })
-            //         }
-            //     })
-            // },
+            handleTag(param){
+                dialog.alert({
+                    title: "提示",
+                    msg: '"'+param+'"' + '添加到我的标签?',
+                    buttons: ['取消', '确定']
+                }, function(ret) {
+                    if (ret.buttonIndex == 2) {
+                        let data = {
+                            tag_id: this.id
+                        }
+                        axios.post(apiHost + '/api/paper/tag_add', data).then(res => {
+                            if (res.data.code === 200) {
+                                toast.success({
+                                    title: "添加成功",
+                                    duration: 2000
+                                })
+                            }
+                        }).catch(function (error) {
+                            alert(error)
+                        })
+                    }
+                })
+            },
             getInfo(){
                 let data = {
                     id: this.id
@@ -124,6 +133,9 @@
                 var r = decodeURI(location.search).substr(1).match(reg)
                 if (r != null) return unescape(r[2])
                 return null
+            },
+            goTag(it) {
+                location.href = './labelView.html?id=' + it.id + '&title=' + it.title
             },
             goIndex(){
                 location.href = './index.html'

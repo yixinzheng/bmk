@@ -22,46 +22,26 @@
             <div class="sider-icon" @click="handleSearch"></div>
         </div>
     </div>
-    <div class="search-result">搜索"<span class="fs-red">科研助手</span>"，约<span class="fs-red">2</span>条结果</div>
+    <div class="search-result">搜索"<span class="fs-red">{{title}}</span>"，约<span class="fs-red">{{total}}</span>条结果</div>
     <div class="list-container">
-        <div class="list-box">
-            <div class="list-title" @click="goView(1)"><span class="fs-red">科研助手</span>科研助手科研助手科研助手科研助手科研助手科研助手科研助手科研助手科研助手</div>
-            <div class="list-tagBox">
+        <div class="list-box" v-for="item in list">
+            <div class="list-title" @click="goView(item.id)">{{item.title}}</div>
+            <div class="list-tagBox" v-if="item.tag.length > 0">
                 <div class="list-tagKey">标签：</div>
                 <div class="list-tagVal">
-                    <div class="list-tag" @click="handleTag">真菌</div>
-                    <div class="list-tag"><span class="fs-red">ma</span></div>
-                    <div class="list-tag">医学</div>
-                    <div class="list-tag">单细胞</div>
-                    <div class="list-tag">流感</div>
+                    <div class="list-tag" v-for="it in item.tag" @click="goTag(it)">{{it.title}}</div>
                 </div>
             </div>
             <div class="list-con">
-                <div class="list-time">2018-08-01</div>
-                <div class="list-comment">100</div>
-                <div class="list-love" :class="{'active': loveState}" @click="toggleLove">100</div>
-            </div>
-        </div>
-        <div class="list-box">
-            <div class="list-title" @click="goView(1)"><span class="fs-red">科研助手</span>科研助手科研助手科研助手科研助手科研助手科研助手科研助手科研助手科研助手</div>
-            <div class="list-tagBox">
-                <div class="list-tagKey">标签：</div>
-                <div class="list-tagVal">
-                    <div class="list-tag" @click="handleTag">真菌</div>
-                    <div class="list-tag"><span class="fs-red">ma</span></div>
-                    <div class="list-tag">医学</div>
-                    <div class="list-tag">单细胞</div>
-                    <div class="list-tag">流感</div>
+                <div class="list-time">{{item.publish_time}}</div>
+                <div class="list-comment">{{item.comment_number}}</div>
+                <div class="list-love" :class="{'active': item.is_starred}" @click="toggleLove(item)">
+                    {{item.star_number}}
                 </div>
-            </div>
-            <div class="list-con">
-                <div class="list-time">2018-08-01</div>
-                <div class="list-comment">100</div>
-                <div class="list-love" :class="{'active': loveState}" @click="toggleLove">100</div>
             </div>
         </div>
     </div>
-    <div class="list-more">点击加载更多</div>
+    <div class="list-more" @click="handleMore">点击加载更多</div>
     <div class="mt4"></div>
     <footer>
         <div class="tab-item tab-work" @click="goIndex">
@@ -96,7 +76,10 @@
         data(){
             return {
                 loveState: false,
-                title: ''
+                list: [],
+                title: '',
+                total: 0,
+                page: 1
             }
         },
         mounted(){
@@ -122,9 +105,9 @@
               this.loveState = !this.loveState
             },
             handleSearch(){
-                console.log(this.title)
                 let data = {
-                    search: this.title
+                    search: this.title,
+                    current_page_num: this.page
                 }
                 axios.get(apiHost + '/api/paper/paper_search',{
                     params: data
@@ -132,6 +115,23 @@
                     if (res.data.code === 200) {
                         console.log(res.data.data.list)
                         this.list = res.data.data.list
+                        this.total = res.data.data.total_num
+                    }
+                }).catch(function (error) {
+                    alert(error)
+                })
+            },
+            handleMore() {
+                this.page = this.page + 1
+                let data = {
+                    search: this.title,
+                    current_page_num: this.page
+                }
+                axios.get(apiHost + '/api/paper/index', {
+                    params: data
+                }).then(res => {
+                    if (res.data.code === 200) {
+                        this.list = this.list.concat(res.data.data.list)
                     }
                 }).catch(function (error) {
                     alert(error)
